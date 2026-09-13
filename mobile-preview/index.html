@@ -89,11 +89,18 @@
     }
     
     .method {
-      border: 1px solid #ddd;
+      border: 2px solid #ddd;
       border-radius: 12px;
       padding: 12px;
       text-align: center;
-      background: #fff
+      background: #fff;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s
+    }
+    
+    .method:hover {
+      border-color: #999
     }
     
     .method b {
@@ -101,6 +108,19 @@
       font-weight: 700;
       font-size: 13px;
       margin-top: 6px
+    }
+    
+    .method-icon {
+      font-size: 24px;
+      margin-bottom: 4px
+    }
+    
+    .method-tick {
+      font-size: 12px;
+      color: #10b981;
+      font-weight: 700;
+      margin-top: 6px;
+      min-height: 16px
     }
     
     .input {
@@ -123,7 +143,12 @@
       font-weight: 800;
       margin-top: 14px;
       border: 0;
-      cursor: pointer
+      cursor: pointer;
+      transition: all 0.2s
+    }
+    
+    .verify:hover {
+      background: #333
     }
     
     .note {
@@ -239,19 +264,22 @@
       </div>
     </div>
     
-    <!-- PAYMENT METHODS -->
+    <!-- PAYMENT METHODS - SELECTABLE -->
     <div class="methods">
-      <div class="method">
-        <div style="font-size:32px;color:#e91e63">◣</div>
+      <div class="method" id="m-bkash" onclick="selectMethod('bkash')">
+        <div class="method-icon">📱</div>
         <b style="color:#e91e63">bKash</b>
+        <div class="method-tick" id="tick-bkash"></div>
       </div>
-      <div class="method">
-        <div style="font-size:32px;color:#f37021">নগ</div>
+      <div class="method" id="m-nagad" onclick="selectMethod('nagad')">
+        <div class="method-icon">💳</div>
         <b style="color:#f37021">Nagad</b>
+        <div class="method-tick" id="tick-nagad"></div>
       </div>
-      <div class="method">
-        <div style="font-size:28px;color:#8a2be2">🚀</div>
+      <div class="method" id="m-rocket" onclick="selectMethod('rocket')">
+        <div class="method-icon">🚀</div>
         <b style="color:#8a2be2">Rocket</b>
+        <div class="method-tick" id="tick-rocket"></div>
       </div>
     </div>
     
@@ -271,6 +299,8 @@
 </div>
 
 <script>
+  let selectedMethod = '';
+  
   function go(id) {
     document.getElementById('home').classList.add('hide');
     document.getElementById('wallet').classList.add('hide');
@@ -283,21 +313,54 @@
     alert(t + " কপি হয়েছে");
   }
   
+  function selectMethod(type) {
+    selectedMethod = type;
+    
+    // Update borders
+    document.querySelectorAll('.method').forEach(m => m.style.border = '2px solid #ddd');
+    document.getElementById('m-' + type).style.border = '2px solid #000';
+    
+    // Clear all ticks
+    document.getElementById('tick-bkash').innerHTML = '';
+    document.getElementById('tick-nagad').innerHTML = '';
+    document.getElementById('tick-rocket').innerHTML = '';
+    document.getElementById('tick-' + type).innerHTML = '✅ সিলেক্টেড';
+    
+    // Copy number
+    navigator.clipboard.writeText('01779328777');
+    
+    // Vibrate if available
+    if (navigator.vibrate) navigator.vibrate(50);
+    
+    // Alert
+    alert(type.toUpperCase() + ' সিলেক্ট হয়েছে!\n01779328777 কপি হয়েছে\nএখন Send Money করুন');
+  }
+  
   function verify() {
+    if (!selectedMethod) {
+      alert('আগে bKash / Nagad / Rocket যেকোনো একটাতে টাচ করুন');
+      return;
+    }
+    
     let f = document.getElementById('from').value;
     let a = document.getElementById('amt').value;
     
     if (!f || !a) {
-      alert("নাম্বার ও টাকা লিখুন");
+      alert('নাম্বার ও টাকা লিখুন');
       return;
     }
     
-    alert("আপনার " + a + " টাকা Verify এর জন্য পাঠানো হয়েছে!\n01779328777 নাম্বারে চেক করা হবে।");
+    alert(a + " টাকা " + selectedMethod + " এ Verify পাঠানো হয়েছে!");
     
     // Clear form
     document.getElementById('from').value = '';
     document.getElementById('amt').value = '';
     document.getElementById('trxid').value = '';
+    selectedMethod = '';
+    document.querySelectorAll('.method').forEach(m => m.style.border = '2px solid #ddd');
+    document.getElementById('tick-bkash').innerHTML = '';
+    document.getElementById('tick-nagad').innerHTML = '';
+    document.getElementById('tick-rocket').innerHTML = '';
   }
   
   // Load add money page by default
