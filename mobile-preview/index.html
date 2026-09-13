@@ -8,410 +8,447 @@
     * {
       margin: 0;
       padding: 0;
-      box-sizing: border-box
+      box-sizing: border-box;
+      font-family: Arial, sans-serif
     }
     
     body {
-      margin: 0;
-      background: #070d20;
-      max-width: 420px;
+      background: #0a1028;
+      max-width: 430px;
       margin: 0 auto;
-      font-family: Arial, sans-serif;
-      color: #fff
+      color: #fff;
+      padding-bottom: 70px
     }
     
-    .container {
-      background: #070d20;
-      padding: 12px;
-      min-height: 100vh
-    }
-    
-    /* TOP BAR */
     .top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px
+      padding: 12px 14px
     }
     
-    .logo {
+    .wallet {
+      background: #131b36;
+      border: 1px solid #22305a;
+      border-radius: 24px;
+      padding: 7px 14px;
       display: flex;
-      gap: 8px;
-      align-items: center
-    }
-    
-    .logo-icon {
-      font-size: 36px
-    }
-    
-    .logo-text {
-      color: #ff2f7b;
-      font-weight: 900;
-      font-size: 22px;
-      line-height: 20px
-    }
-    
-    .top-right {
-      display: flex;
-      gap: 8px;
-      align-items: center
-    }
-    
-    .whatsapp {
-      background: #25d366;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      display: flex;
+      gap: 6px;
       align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      cursor: pointer
-    }
-    
-    .wallet-btn {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      background: #121a33;
-      border-radius: 20px;
-      padding: 6px 12px;
-      border: 1px solid #223;
       cursor: pointer;
       transition: all 0.2s
     }
     
-    .wallet-btn:hover {
-      border-color: #334
+    .wallet:hover {
+      border-color: #3a5aaa
     }
     
-    .wallet-icon {
-      font-size: 18px
-    }
-    
-    .wallet-amount {
-      color: #ffeb00;
-      font-weight: 900
-    }
-    
-    /* BONUS BANNER */
-    .bonus-banner {
-      background: linear-gradient(180deg, #2a5cff, #1a3ccc);
-      border-radius: 16px;
-      padding: 14px;
-      margin-bottom: 10px;
+    .blue {
+      background: linear-gradient(180deg, #2f61ff, #1e44d6);
+      border-radius: 18px;
+      margin: 10px 12px;
+      padding: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border: 1px solid #4a6fff
     }
     
-    .bonus-left {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      flex: 1
-    }
-    
-    .bonus-icon {
-      background: #ffeb00;
-      width: 54px;
-      height: 54px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      flex-shrink: 0
-    }
-    
-    .bonus-text h3 {
-      color: #ffeb00;
-      font-weight: 900;
-      font-size: 18px;
-      margin-bottom: 4px;
-      line-height: 1.2
-    }
-    
-    .bonus-text p {
-      font-size: 11px;
-      color: #ccc
-    }
-    
-    .bonus-btn {
-      background: #ffeb00;
+    .yellow {
+      background: #ffea00;
+      color: #000;
       border: 0;
       padding: 10px 18px;
-      border-radius: 22px;
+      border-radius: 24px;
       font-weight: 900;
       cursor: pointer;
-      white-space: nowrap;
       transition: all 0.2s
     }
     
-    .bonus-btn:hover {
+    .yellow:hover {
       background: #ffd600
     }
     
-    /* REFER CARD */
-    .refer-card {
-      background: #11172f;
+    .box {
+      background: #101938;
+      border: 1px solid #1d2a55;
       border-radius: 16px;
-      padding: 12px;
-      margin-bottom: 10px;
-      border: 1px solid #1f2a4a
+      margin: 10px 12px;
+      padding: 12px
     }
     
-    .refer-top {
+    .match {
+      background: #101938;
+      border: 1px solid #1d2a55;
+      border-radius: 14px;
+      margin: 8px 12px;
+      padding: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center
     }
     
-    .refer-left {
-      display: flex;
-      gap: 10px
-    }
-    
-    .refer-icon {
-      font-size: 34px
-    }
-    
-    .refer-text b {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 2px;
-      line-height: 1.3
-    }
-    
-    .refer-text p {
-      font-size: 10px;
-      color: #aaa;
-      margin-top: 2px
-    }
-    
-    .refer-btn {
-      background: #ffeb00;
+    .join {
+      background: #2b5bff;
       border: 0;
-      padding: 6px 14px;
-      border-radius: 20px;
+      color: #fff;
+      padding: 9px 20px;
+      border-radius: 12px;
       font-weight: 800;
-      height: 32px;
       cursor: pointer;
-      transition: all 0.2s;
-      color: #000
+      transition: all 0.2s
     }
     
-    .refer-btn:hover {
+    .join:hover {
+      background: #1a3fee
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 10px 12px
+    }
+    
+    .card {
+      background: #101938;
+      border: 1px solid #1d2a55;
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+      position: relative
+    }
+    
+    .play {
+      background: #ffea00;
+      color: #000;
+      border: 0;
+      width: 100%;
+      padding: 9px;
+      border-radius: 24px;
+      font-weight: 900;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: all 0.2s
+    }
+    
+    .play:hover {
       background: #ffd600
     }
     
-    /* NOTICE SECTION */
-    .notice-box {
-      background: #151d36;
-      border-radius: 10px;
-      padding: 8px;
-      display: flex;
-      gap: 8px;
-      border: 1px solid #26325a;
-      margin-top: 10px
+    .tag {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: #fff
     }
     
-    .notice-icon {
-      font-size: 20px;
-      flex-shrink: 0
+    .new {
+      background: #ff2742
     }
     
-    .notice-text {
-      font-size: 11px;
-      line-height: 1.4
+    .hot {
+      background: #ff8a00
     }
     
-    .notice-text b {
-      display: block;
-      margin-bottom: 2px
-    }
-    
-    .notice-highlight {
-      color: #ffeb00;
-      font-weight: 900
-    }
-    
-    /* SCREENS */
-    .screen {
+    .hide {
       display: none
     }
     
-    .screen.active {
-      display: block
+    .wCard {
+      background: #fff;
+      color: #000;
+      border-radius: 18px;
+      margin: 10px;
+      padding: 14px
+    }
+    
+    .method {
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #fff
+    }
+    
+    .method:hover {
+      border-color: #999
+    }
+    
+    .method.active {
+      border-color: #000;
+      background: #fff9c4
+    }
+    
+    .method b {
+      display: block;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px
+    }
+    
+    .method-tick {
+      font-size: 12px;
+      color: #10b981;
+      font-weight: 700;
+      min-height: 16px
+    }
+    
+    .bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-width: 430px;
+      margin: 0 auto;
+      background: #0a1028;
+      border-top: 1px solid #1d2a55;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0
+    }
+    
+    .back-btn {
+      background: #fff;
+      color: #000;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px
+    }
+    
+    .input-field {
+      width: 100%;
+      border: 2px solid #000;
+      border-radius: 10px;
+      padding: 12px;
+      margin: 6px 0;
+      text-align: center;
+      font-size: 15px
+    }
+    
+    .verify-btn {
+      width: 100%;
+      background: #000;
+      color: #fff;
+      padding: 14px;
+      border-radius: 12px;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.2s
+    }
+    
+    .verify-btn:hover {
+      background: #333
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <!-- HOME SCREEN -->
-  <div id="home" class="screen active">
-    <!-- TOP -->
-    <div class="top">
-      <div class="logo">
-        <div class="logo-icon">🎲</div>
-        <div class="logo-text">LUDO<br>POOL</div>
-      </div>
-      <div class="top-right">
-        <div class="whatsapp" onclick="alert('WhatsApp গ্রুপে যোগ দিন')">🟢</div>
-        <div class="wallet-btn" onclick="openWallet()">
-          <span class="wallet-icon">💰</span>
-          <span class="wallet-amount">৳ 1,250</span>
-        </div>
+<!-- TOP BAR -->
+<div class="top">
+  <div style="display: flex; gap: 8px; align-items: center">
+    <div style="font-size: 36px">🎲</div>
+    <div style="color: #ff3b82; font-weight: 900; font-size: 22px; line-height: 19px">LUDO<br>POOL</div>
+  </div>
+  <div style="display: flex; gap: 8px; align-items: center">
+    <div style="background: #20c25e; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer">💬</div>
+    <div class="wallet" onclick="show('wallet')">
+      <span>💰</span>
+      <b style="color: #ffea00">৳ 1,250</b>
+    </div>
+  </div>
+</div>
+
+<!-- HOME SCREEN -->
+<div id="home">
+  <!-- BONUS BANNER -->
+  <div class="blue">
+    <div style="display: flex; gap: 12px; align-items: center">
+      <div style="background: #ffea00; width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 30px">🎁</div>
+      <div>
+        <div style="color: #ffea00; font-weight: 900; font-size: 17px">১০০% বোনাস এখনই!<br>রেজিস্টার করলেই পাবেন</div>
+        <div style="font-size: 11px">প্রথম রিচার্জে পাবেন ১০০% বোনাস</div>
       </div>
     </div>
-    
-    <!-- BLUE BONUS BANNER -->
-    <div class="bonus-banner">
-      <div class="bonus-left">
-        <div class="bonus-icon">🎁</div>
-        <div class="bonus-text">
-          <h3>১০০% বোনাস এখনই!<br>রেজিস্টার করলেই পাবেন</h3>
-          <p>প্রথম রিচার্জে পাবেন ১০০% বোনাস</p>
+    <button class="yellow" onclick="alert('বোনাস ক্লেইম প্রক্রিয়া আসছে')">ক্লেইম</button>
+  </div>
+  
+  <!-- REFER & NOTICE -->
+  <div class="box">
+    <div style="display: flex; justify-content: space-between">
+      <div style="display: flex; gap: 10px">
+        <div style="font-size: 32px">🎁</div>
+        <div>
+          <b>রেফার করু ও পান<br>৳200</b>
+          <div style="font-size: 10px; color: #9aa3c2">আপনার বন্ধু রেজিস্টার করলে<br>পাবেন ৳200 ক্যাশ</div>
         </div>
       </div>
-      <button class="bonus-btn" onclick="alert('বোনাস ক্লেইম প্রক্রিয়া শীঘ্রই আসছে')">ক্লেইম</button>
+      <button class="yellow" style="padding: 8px 14px; height: 32px" onclick="alert('রেফারেল লিঙ্ক কপি: https://ludopool.com/?ref=YOU')">ইনভাইট ></button>
     </div>
-    
-    <!-- REFER + NOTICE -->
-    <div class="refer-card">
-      <!-- REFER SECTION -->
-      <div class="refer-top">
-        <div class="refer-left">
-          <div class="refer-icon">🎁</div>
-          <div class="refer-text">
-            <b>রেফার করু ও পান<br>৳200</b>
-            <p>আপনার বন্ধু রেজিস্টার করলে<br>পাবেন ৳200 ক্যাশ</p>
-          </div>
-        </div>
-        <button class="refer-btn" onclick="alert('রেফারেল লিঙ্ক কপি হয়েছে: https://ludopool.com/?ref=YOU')">ইনভাইট ></button>
-      </div>
-      
-      <!-- NOTICE BOX -->
-      <div class="notice-box">
-        <div class="notice-icon">🔔</div>
-        <div class="notice-text">
-          <b>নোটিশ</b>
-          ⚠️ নতুন লুডো টুর্নামেন্ট শুরু হয়েছে! এখনই যোগ দিন ও জিতে নিন
-          <span class="notice-highlight">৳5000</span>
-        </div>
+    <div style="background: #121c3a; border: 1px solid #223366; border-radius: 10px; padding: 8px; margin-top: 10px; display: flex; gap: 8px">
+      <div>🔔</div>
+      <div style="font-size: 11px">
+        <b>নোটিশ</b><br>
+        ⚠️ নতুন লুডো টুর্নামেন্ট শুরু হয়েছে! এখনই যোগ দিন ও জিতে নিন <b style="color: #ffea00">৳5000</b>
       </div>
     </div>
   </div>
   
-  <!-- WALLET SCREEN -->
-  <div id="wallet" class="screen">
-    <div class="top">
-      <div class="logo" onclick="closeWallet()" style="cursor: pointer">
-        <span style="font-size: 20px">❮</span>
-        <div class="logo-text">LUDO<br>POOL</div>
-      </div>
-      <div class="wallet-btn" onclick="closeWallet()">
-        <span class="wallet-icon">💰</span>
-        <span class="wallet-amount">৳ 1,250</span>
+  <!-- RUNNING MATCHES -->
+  <div style="display: flex; justify-content: space-between; padding: 12px 14px">
+    <b style="font-size: 18px">চলমান ম্যাচ</b>
+    <span style="color: #3a6aff; font-size: 13px; cursor: pointer">সব দেখুন ></span>
+  </div>
+  
+  <div class="match">
+    <div style="display: flex; gap: 10px; align-items: center">
+      <div style="width: 46px; height: 46px; background: #ff2d5a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px">🎲</div>
+      <div>
+        <b>Classic Match - ৳50</b>
+        <div style="font-size: 11px; color: #9aa3c2">2/2 Players • শুরু হবে 2 মিনিটে</div>
       </div>
     </div>
+    <button class="join">JOIN</button>
+  </div>
+  
+  <div class="match">
+    <div style="display: flex; gap: 10px; align-items: center">
+      <div style="width: 46px; height: 46px; background: #1a2f5a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px">🎱</div>
+      <div>
+        <b>Pool Match - ৳100</b>
+        <div style="font-size: 11px; color: #9aa3c2">1/2 Players • অপেক্ষা করছে</div>
+      </div>
+    </div>
+    <button class="join">JOIN</button>
+  </div>
+  
+  <!-- GAMES SECTION -->
+  <div style="padding: 12px 14px 0">
+    <b style="font-size: 20px">গেমস</b>
+    <div style="font-size: 12px; color: #9aa3c2">জনপ্রিয় গেমস</div>
+  </div>
+  
+  <div class="grid">
+    <div class="card">
+      <span class="tag new">NEW</span>
+      <div style="font-size: 42px">🎲</div>
+      <b>Ludo Classic</b>
+      <button class="play" onclick="show('wallet')">Play</button>
+    </div>
     
-    <div style="background: #fff; border-radius: 18px; margin-top: 12px; padding: 16px; color: #000">
-      <div style="padding: 10px 0; border-bottom: 1px solid #eee">
-        <b style="font-size: 11px">AVAILABLE BALANCE :</b>
-        <span style="float: right; font-size: 11px; color: #2563eb; cursor: pointer" onclick="alert('Transaction history coming soon')">View Transactions ❯</span>
-        <div style="font-size: 24px; font-weight: 900; margin-top: 6px">৳ 0</div>
-      </div>
-      
-      <div style="padding: 10px 0; border-bottom: 1px solid #eee">
-        <b style="font-size: 11px">💲 DEPOSIT CASH BALANCE :</b>
-        <button onclick="goAddMoney()" style="float: right; background: #2563eb; color: #fff; border: 0; padding: 8px 12px; border-radius: 6px; font-weight: 700; cursor: pointer">➕ ADD MONEY</button>
-        <div style="font-size: 22px; font-weight: 900; margin-top: 6px">৳ 0.00</div>
-      </div>
-      
-      <div style="text-align: center; padding: 14px">
-        <button onclick="goAddMoney()" style="background: #2563eb; color: #fff; border: 0; padding: 12px 28px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 14px">ADD MONEY পেজে যান</button>
-      </div>
+    <div class="card">
+      <span class="tag new">NEW</span>
+      <div style="font-size: 42px">🀧</div>
+      <b>Carrom</b>
+      <button class="play" onclick="show('wallet')">Play</button>
+    </div>
+    
+    <div class="card">
+      <span class="tag hot">HOT</span>
+      <div style="font-size: 42px">⚪</div>
+      <b>16 Ghuti</b>
+      <button class="play" onclick="show('wallet')">Play</button>
+    </div>
+    
+    <div class="card">
+      <span class="tag hot">HOT</span>
+      <div style="font-size: 42px">🐍</div>
+      <b>Snake Ladder</b>
+      <button class="play" onclick="show('wallet')">Play</button>
     </div>
   </div>
   
-  <!-- ADD MONEY SCREEN -->
-  <div id="addMoney" class="screen">
-    <div class="top">
-      <div class="logo" onclick="closeWallet()" style="cursor: pointer">
-        <span style="font-size: 20px">❮</span>
-        <div style="color: #fff; font-weight: 900">Add Money</div>
+  <!-- BOTTOM NAV -->
+  <div class="bottom">
+    <div style="text-align: center; color: #9aa3c2; cursor: pointer">💬<br>Chat</div>
+    <div style="text-align: center; color: #3a6aff; cursor: pointer">▶️<br>Play</div>
+    <div style="text-align: center; color: #9aa3c2; cursor: pointer">👤<br>Me</div>
+  </div>
+</div>
+
+<!-- WALLET SCREEN -->
+<div id="wallet" class="hide">
+  <div class="wCard">
+    <div style="border-bottom: 1px solid #eee; padding: 10px 0">
+      <b style="font-size: 11px">AVAILABLE BALANCE :</b>
+      <div style="font-size: 26px; font-weight: 900">৳ 0</div>
+    </div>
+    
+    <div style="padding: 10px 0; border-bottom: 1px solid #eee">
+      <b style="font-size: 11px">DEPOSIT : ৳ 0.00</b>
+      <button onclick="show('add')" style="float: right; background: #2563eb; color: #fff; border: 0; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: 700">ADD MONEY</button>
+    </div>
+    
+    <div style="text-align: center; margin-top: 12px">
+      <button onclick="show('home')" style="padding: 8px 16px; background: #f0f0f0; color: #000; border: 0; border-radius: 6px; cursor: pointer; font-weight: 700">BACK HOME</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD MONEY SCREEN -->
+<div id="add" class="hide">
+  <div style="background: #131a35; padding: 10px; display: flex; gap: 10px; align-items: center">
+    <div class="back-btn" onclick="show('wallet')">❮</div>
+    <b style="font-size: 16px">Add Money</b>
+  </div>
+  
+  <div class="wCard">
+    <!-- PAYMENT NUMBERS -->
+    <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee">
+      <b>📤 01779328777</b>
+      <span onclick="navigator.clipboard.writeText('01779328777'); alert('কপি হয়েছে')" style="cursor: pointer; color: #7c0080; font-weight: 700">📋 (সেন্টমানি)</span>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee">
+      <b>📤 01779328777</b>
+      <span onclick="navigator.clipboard.writeText('01779328777'); alert('কপি হয়েছে')" style="cursor: pointer; color: #7c0080; font-weight: 700">📋 (সেন্টমানি)</span>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between; padding: 10px 0">
+      <b>📤 01779328777</b>
+      <span onclick="navigator.clipboard.writeText('01779328777'); alert('কপি হয়েছে')" style="cursor: pointer; color: #7c0080; font-weight: 700">📋 (সেন্টমানি)</span>
+    </div>
+    
+    <!-- PAYMENT METHODS -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 12px 0">
+      <div class="method" id="m1" onclick="sel('m1')">
+        <b style="color: #e91e63">bKash</b>
+        <div class="method-tick" id="t1"></div>
+      </div>
+      <div class="method" id="m2" onclick="sel('m2')">
+        <b style="color: #f37021">Nagad</b>
+        <div class="method-tick" id="t2"></div>
+      </div>
+      <div class="method" id="m3" onclick="sel('m3')">
+        <b style="color: #8a2be2">Rocket</b>
+        <div class="method-tick" id="t3"></div>
       </div>
     </div>
     
-    <div style="background: #fff; border-radius: 18px; margin-top: 12px; padding: 16px; color: #000">
-      <!-- PAYMENT NUMBERS -->
-      <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee">
-        <div style="display: flex; align-items: center; gap: 8px">
-          <span style="color: #e91e63; font-size: 18px">📤</span>
-          <b style="font-size: 18px; font-weight: 900">01779328777</b>
-        </div>
-        <div style="display: flex; align-items: center; gap: 8px">
-          <span onclick="copy('01779328777')" style="font-size: 20px; cursor: pointer">📋</span>
-          <span style="color: #7c0080; font-size: 13px; font-weight: 700">( সেন্টমানি করুন )</span>
-        </div>
-      </div>
-      
-      <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee">
-        <div style="display: flex; align-items: center; gap: 8px">
-          <span style="color: #f37021; font-size: 18px">📤</span>
-          <b style="font-size: 18px; font-weight: 900">01779328777</b>
-        </div>
-        <div style="display: flex; align-items: center; gap: 8px">
-          <span onclick="copy('01779328777')" style="font-size: 20px; cursor: pointer">📋</span>
-          <span style="color: #666; font-size: 13px">(সেন্টমানি করুন)</span>
-        </div>
-      </div>
-      
-      <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0">
-        <div style="display: flex; align-items: center; gap: 8px">
-          <span style="color: #8a2be2; font-size: 18px">📤</span>
-          <b style="font-size: 18px; font-weight: 900">01779328777</b>
-        </div>
-        <div style="display: flex; align-items: center; gap: 8px">
-          <span onclick="copy('01779328777')" style="font-size: 20px; cursor: pointer">📋</span>
-          <span style="color: #666; font-size: 13px">(সেন্টমানি করুন)</span>
-        </div>
-      </div>
-      
-      <!-- PAYMENT METHODS -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 14px 0">
-        <div class="method" id="m-bkash" onclick="selectMethod('bkash')" style="border: 2px solid #ddd; border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; background: #fff; transition: all 0.2s">
-          <div style="font-size: 24px">📱</div>
-          <b style="color: #e91e63; display: block; font-weight: 700; font-size: 13px; margin-top: 6px">bKash</b>
-          <div id="tick-bkash" style="font-size: 12px; color: #10b981; font-weight: 700; margin-top: 6px; min-height: 16px"></div>
-        </div>
-        <div class="method" id="m-nagad" onclick="selectMethod('nagad')" style="border: 2px solid #ddd; border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; background: #fff; transition: all 0.2s">
-          <div style="font-size: 24px">💳</div>
-          <b style="color: #f37021; display: block; font-weight: 700; font-size: 13px; margin-top: 6px">Nagad</b>
-          <div id="tick-nagad" style="font-size: 12px; color: #10b981; font-weight: 700; margin-top: 6px; min-height: 16px"></div>
-        </div>
-        <div class="method" id="m-rocket" onclick="selectMethod('rocket')" style="border: 2px solid #ddd; border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; background: #fff; transition: all 0.2s">
-          <div style="font-size: 24px">🚀</div>
-          <b style="color: #8a2be2; display: block; font-weight: 700; font-size: 13px; margin-top: 6px">Rocket</b>
-          <div id="tick-rocket" style="font-size: 12px; color: #10b981; font-weight: 700; margin-top: 6px; min-height: 16px"></div>
-        </div>
-      </div>
-      
-      <!-- FORM INPUTS -->
-      <input id="from" style="width: 100%; border: 2px solid #000; border-radius: 10px; padding: 12px; margin: 8px 0; text-align: center; font-size: 15px" placeholder="যেই নাম্বার থেকে টাকা পাঠিয়েছেন">
-      <input id="amt" type="number" style="width: 100%; border: 2px solid #000; border-radius: 10px; padding: 12px; margin: 8px 0; text-align: center; font-size: 15px" placeholder="কত টাকা পাঠিয়েছেন">
-      <input id="trxid" style="width: 100%; border: 2px solid #000; border-radius: 10px; padding: 12px; margin: 8px 0; text-align: center; font-size: 15px" placeholder="TRXID (ঐচ্ছিক)">
-      
-      <!-- VERIFY BUTTON -->
-      <button onclick="verify()" style="width: 100%; background: #000; color: #fff; padding: 14px; border-radius: 12px; font-size: 18px; font-weight: 800; margin-top: 14px; border: 0; cursor: pointer; transition: all 0.2s">VERIFY</button>
-      
-      <!-- NOTE -->
-      <div style="font-size: 12px; color: #777; text-align: center; margin-top: 12px; line-height: 18px">
-        Verify করার আগে Send Money করতে হবে, নাহলে<br>আপনার Verification সফল হবে না
-      </div>
+    <!-- FORM INPUTS -->
+    <input id="from" class="input-field" placeholder="যেই নাম্বার থেকে টাকা পাঠিয়েছেন">
+    <input id="amt" type="number" class="input-field" placeholder="কত টাকা পাঠিয়েছেন">
+    <input id="trxid" class="input-field" placeholder="TRXID (ঐচ্ছিক)">
+    
+    <!-- VERIFY BUTTON -->
+    <button class="verify-btn" onclick="doV()">VERIFY</button>
+    
+    <!-- NOTE -->
+    <div style="font-size: 12px; color: #777; text-align: center; margin-top: 12px; line-height: 18px">
+      Verify করার আগে Send Money করতে হবে, নাহলে<br>আপনার Verification সফল হবে না
     </div>
   </div>
 </div>
@@ -419,49 +456,29 @@
 <script>
   let selectedMethod = '';
   
-  function openWallet() {
-    document.getElementById('home').classList.remove('active');
-    document.getElementById('wallet').classList.add('active');
+  function show(id) {
+    document.getElementById('home').classList.add('hide');
+    document.getElementById('wallet').classList.add('hide');
+    document.getElementById('add').classList.add('hide');
+    document.getElementById(id).classList.remove('hide');
   }
   
-  function closeWallet() {
-    document.getElementById('wallet').classList.remove('active');
-    document.getElementById('addMoney').classList.remove('active');
-    document.getElementById('home').classList.add('active');
-    selectedMethod = '';
-  }
-  
-  function goAddMoney() {
-    document.getElementById('wallet').classList.remove('active');
-    document.getElementById('addMoney').classList.add('active');
-  }
-  
-  function copy(t) {
-    navigator.clipboard.writeText(t);
-    alert(t + " কপি হয়েছে");
-  }
-  
-  function selectMethod(type) {
-    selectedMethod = type;
-    
-    document.querySelectorAll('.method').forEach(m => m.style.border = '2px solid #ddd');
-    document.getElementById('m-' + type).style.border = '2px solid #000';
-    
-    document.getElementById('tick-bkash').innerHTML = '';
-    document.getElementById('tick-nagad').innerHTML = '';
-    document.getElementById('tick-rocket').innerHTML = '';
-    document.getElementById('tick-' + type).innerHTML = '✅ সিলেক্টেড';
-    
+  function sel(id) {
+    selectedMethod = id;
+    document.querySelectorAll('.method').forEach(m => m.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('t1').innerHTML = '';
+    document.getElementById('t2').innerHTML = '';
+    document.getElementById('t3').innerHTML = '';
+    document.getElementById('t' + id[1]).innerHTML = '✅';
     navigator.clipboard.writeText('01779328777');
-    
     if (navigator.vibrate) navigator.vibrate(50);
-    
-    alert(type.toUpperCase() + ' সিলেক্ট হয়েছে!\n01779328777 কপি হয়েছে\nএখন Send Money করুন');
+    alert(id.toUpperCase() + ' সিলেক্ট হয়েছে!\n01779328777 কপি হয়েছে\nএখন Send Money করুন');
   }
   
-  function verify() {
+  function doV() {
     if (!selectedMethod) {
-      alert('আগে bKash / Nagad / Rocket যেকোনো একটাতে টাচ করুন');
+      alert('bKash / Nagad / Rocket তে টাচ করুন');
       return;
     }
     
@@ -473,17 +490,19 @@
       return;
     }
     
-    alert(a + " টাকা " + selectedMethod + " এ Verify পাঠানো হয়েছে!");
+    alert(a + ' টাকা ' + selectedMethod.toUpperCase() + ' এ Verify হয়েছে!');
     
     document.getElementById('from').value = '';
     document.getElementById('amt').value = '';
     document.getElementById('trxid').value = '';
     selectedMethod = '';
-    document.querySelectorAll('.method').forEach(m => m.style.border = '2px solid #ddd');
-    document.getElementById('tick-bkash').innerHTML = '';
-    document.getElementById('tick-nagad').innerHTML = '';
-    document.getElementById('tick-rocket').innerHTML = '';
+    document.querySelectorAll('.method').forEach(m => m.classList.remove('active'));
+    document.getElementById('t1').innerHTML = '';
+    document.getElementById('t2').innerHTML = '';
+    document.getElementById('t3').innerHTML = '';
   }
+  
+  show('home');
 </script>
 
 </body>
