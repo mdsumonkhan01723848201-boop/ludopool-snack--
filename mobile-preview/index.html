@@ -6,20 +6,21 @@
   <title>LUDO POOL</title>
   <style>
     :root{
-      --bg:#0a0f1f;
-      --card:#1a1a2e;
+      --bg:#0e1222;
+      --card:#1a1f35;
       --yellow:#ffcc00;
       --purple:#9b7bff;
       --green:#10b981;
+      --blue:#3b82f6;
+      --pink:#ec4899;
       --muted:#8892b0;
-      --border-yellow:rgba(255,204,0,0.3);
       color-scheme:dark
     }
     
     *{margin:0;padding:0;box-sizing:border-box}
-    html,body{height:100%;background:var(--bg);font-family:'Bangla Font',Arial,sans-serif;color:#fff}
+    html,body{height:100%;background:var(--bg);font-family:Arial,sans-serif;color:#fff}
     
-    .app{max-width:420px;margin:0 auto;padding-bottom:80px;background:var(--bg)}
+    .app{max-width:420px;margin:0 auto;padding-bottom:20px;background:var(--bg);min-height:100vh}
     
     /* TOP BAR */
     .topbar{
@@ -29,61 +30,69 @@
       height:56px;
       padding:0 12px;
       background:var(--bg);
-      border-bottom:1px solid rgba(255,255,255,0.05);
-      position:sticky;
-      top:0;
-      z-index:100
+      border-bottom:1px solid rgba(255,255,255,0.05)
     }
     
-    .logo{font-weight:700;font-size:20px;color:var(--yellow)}
-    
-    .whatsapp-icon{
-      width:36px;
-      height:36px;
-      background:var(--green);
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      font-size:18px
-    }
-    
-    .wallet-btn{
-      background:var(--card);
-      border:2px solid var(--yellow);
-      color:var(--yellow);
-      padding:6px 12px;
-      border-radius:8px;
-      cursor:pointer;
-      display:flex;
-      align-items:center;
-      gap:4px;
+    .logo{
       font-weight:700;
-      font-size:14px
+      font-size:18px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      cursor:pointer
     }
     
-    /* BANNER */
-    .banner{
-      background:linear-gradient(135deg,#1e3a8a 0%,#1e40af 100%);
-      padding:16px 12px;
-      border-radius:12px;
-      margin:12px;
+    .back-arrow{
+      font-size:20px;
+      cursor:pointer;
+      display:none
+    }
+    
+    .wallet-badge{
+      background:var(--yellow);
+      color:#000;
+      padding:6px 12px;
+      border-radius:6px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:13px
+    }
+    
+    /* HOME SCREEN */
+    .screen{display:none}
+    .screen.active{display:block}
+    
+    #home{padding:16px}
+    #wallet{padding:16px}
+    
+    /* GAMES SECTION */
+    .games-container{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:16px;
-      align-items:center;
-      border:2px solid var(--border-yellow)
+      gap:12px;
+      margin-bottom:16px
     }
     
-    .banner-text h3{
-      color:var(--yellow);
-      font-size:16px;
-      margin-bottom:8px;
-      font-weight:700
+    .game-card{
+      background:var(--card);
+      border-radius:12px;
+      padding:12px;
+      text-align:center;
+      border:1px solid rgba(255,255,255,0.1)
     }
     
-    .banner-btn{
+    .game-emoji{
+      font-size:48px;
+      margin-bottom:8px
+    }
+    
+    .game-name{
+      font-weight:700;
+      font-size:14px;
+      margin-bottom:8px
+    }
+    
+    .play-btn{
       background:var(--yellow);
       color:#000;
       padding:8px 12px;
@@ -92,66 +101,123 @@
       cursor:pointer;
       font-weight:700;
       font-size:12px;
-      margin-top:8px
+      width:100%
     }
     
-    .banner-phone{
-      width:100%;
-      height:120px;
-      background:linear-gradient(135deg,var(--purple),#7c3aed);
-      border-radius:12px;
+    /* WALLET PAGE */
+    .wallet-card{
+      background:#fff;
+      color:#000;
+      border-radius:16px;
+      padding:16px;
+      margin-bottom:12px
+    }
+    
+    .wallet-row{
       display:flex;
+      justify-content:space-between;
       align-items:center;
-      justify-content:center;
-      font-size:48px
+      padding:12px 0;
+      border-bottom:1px solid #f0f0f0
     }
     
-    /* REFERRAL SECTION */
-    .referral{
-      background:var(--card);
-      border:2px solid var(--border-yellow);
-      padding:12px;
-      border-radius:12px;
-      margin:12px;
-      margin-top:0
+    .wallet-row:last-child{
+      border-bottom:none
     }
     
-    .referral-header{
-      color:var(--yellow);
+    .wallet-label{
+      font-size:12px;
       font-weight:700;
-      margin-bottom:8px;
-      font-size:14px
+      color:#666
     }
     
-    .referral-box{
-      background:rgba(255,204,0,0.1);
-      border:2px solid var(--yellow);
-      padding:12px;
-      border-radius:8px;
+    .wallet-amount{
+      font-size:16px;
+      font-weight:700;
+      color:#000
+    }
+    
+    .wallet-link{
+      color:#3b82f6;
+      font-size:12px;
+      cursor:pointer;
+      text-decoration:underline
+    }
+    
+    .btn-small{
+      padding:6px 12px;
+      border-radius:6px;
+      border:0;
+      cursor:pointer;
+      font-weight:700;
+      font-size:11px;
+      white-space:nowrap
+    }
+    
+    .btn-green{background:var(--green);color:#fff}
+    .btn-blue{background:var(--blue);color:#fff}
+    .btn-purple{background:var(--purple);color:#fff}
+    .btn-pink{background:var(--pink);color:#fff}
+    
+    .wallet-section-title{
+      color:#666;
+      font-size:12px;
+      font-weight:700;
+      margin-top:16px;
       margin-bottom:8px
     }
     
-    .referral-code{
+    .help-box{
+      background:#fff;
+      color:#000;
+      border-radius:12px;
+      padding:12px;
+      margin-bottom:12px
+    }
+    
+    .help-title{
       font-weight:700;
-      font-size:16px;
-      color:var(--yellow);
+      font-size:13px;
       margin-bottom:4px
     }
     
-    .referral-meta{
-      color:var(--muted);
+    .help-subtitle{
       font-size:12px;
+      color:#666;
       margin-bottom:8px
     }
     
-    .referral-buttons{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap
+    .help-btn{
+      width:100%;
+      padding:8px 12px;
+      background:var(--pink);
+      color:#fff;
+      border:0;
+      border-radius:6px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:12px
     }
     
-    .referral-buttons button{
-      padding:6px 10px;
+    .contact-box{
+      background:#fff;
+      color:#000;
+      border-radius:12px;
+      padding:12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center
+    }
+    
+    .contact-text{
+      font-size:12px;
+      font-weight:600
+    }
+    
+    .btn-contact{
+      background:var(--blue);
+      color:#fff;
+      padding:8px 12px;
       border-radius:6px;
       border:0;
       cursor:pointer;
@@ -159,275 +225,8 @@
       font-size:12px
     }
     
-    .referral-buttons .copy{
-      background:var(--yellow);
-      color:#000
-    }
-    
-    .referral-buttons .share{
-      background:var(--purple);
-      color:#fff
-    }
-    
-    /* NOTICE & SECTION HEADERS */
-    .notice{
-      padding:0 12px;
-      margin-top:12px;
-      margin-bottom:8px;
-      font-size:14px;
-      color:var(--muted)
-    }
-    
-    .notice-text{
-      color:var(--yellow);
-      font-weight:700;
-      display:inline
-    }
-    
-    .section-header{
-      padding:0 12px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-top:12px;
-      margin-bottom:12px
-    }
-    
-    .section-title{
-      font-weight:700;
-      font-size:16px
-    }
-    
-    .section-badge{
-      background:#FF6B6B;
-      color:#fff;
-      padding:4px 8px;
-      border-radius:6px;
-      font-size:12px;
-      font-weight:700
-    }
-    
-    /* MATCH CARDS */
-    .match-cards{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      padding:0 12px;
-      margin-bottom:12px
-    }
-    
-    .match-card{
-      background:var(--card);
-      border:2px solid var(--border-yellow);
-      border-radius:12px;
-      padding:12px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px
-    }
-    
-    .match-card-left h4{
-      font-weight:700;
-      font-size:15px;
-      margin-bottom:4px;
-      color:#fff
-    }
-    
-    .match-card-left p{
-      color:var(--muted);
-      font-size:13px
-    }
-    
-    .match-card-right{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:6px
-    }
-    
-    .match-card-badge{
-      background:#FF6B6B;
-      color:#fff;
-      padding:4px 8px;
-      border-radius:6px;
-      font-size:12px;
-      font-weight:700
-    }
-    
-    .match-card-logo{
-      width:50px;
-      height:50px;
-      background:linear-gradient(135deg,var(--yellow),#fbbf24);
-      border-radius:8px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:24px
-    }
-    
-    .match-card-share{
-      background:var(--purple);
-      color:#fff;
-      padding:4px 8px;
-      border-radius:6px;
-      font-size:12px;
-      cursor:pointer;
-      border:0;
-      font-weight:700
-    }
-    
-    /* GAMES GRID */
-    .games-section{
-      padding:0 12px;
-      margin-bottom:12px
-    }
-    
-    .games-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px
-    }
-    
-    .game-card{
-      background:var(--card);
-      border:2px solid var(--border-yellow);
-      border-radius:12px;
-      overflow:hidden;
-      cursor:pointer;
-      transition:transform 0.2s,border-color 0.2s;
-      position:relative
-    }
-    
-    .game-card:hover{
-      transform:translateY(-2px);
-      border-color:var(--yellow)
-    }
-    
-    .game-card-image{
-      width:100%;
-      height:100px;
-      background:linear-gradient(135deg,var(--purple),#7c3aed);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:48px;
-      position:relative
-    }
-    
-    .game-badge{
-      position:absolute;
-      top:8px;
-      right:8px;
-      padding:4px 8px;
-      border-radius:4px;
-      font-size:11px;
-      font-weight:700;
-      color:#fff
-    }
-    
-    .game-badge.new{
-      background:var(--green)
-    }
-    
-    .game-badge.hot{
-      background:#FF6B6B
-    }
-    
-    .game-card-content{
-      padding:12px
-    }
-    
-    .game-name{
-      font-weight:700;
-      font-size:14px;
-      margin-bottom:4px
-    }
-    
-    .game-desc{
-      color:var(--muted);
-      font-size:12px;
-      margin-bottom:8px
-    }
-    
-    .game-play-btn{
-      background:var(--yellow);
-      color:#000;
-      padding:6px 10px;
-      border-radius:6px;
-      border:0;
-      cursor:pointer;
-      font-weight:700;
-      font-size:12px;
-      width:100%
-    }
-    
-    /* BOTTOM NAV */
-    .bottom-nav{
-      position:fixed;
-      bottom:0;
-      left:0;
-      right:0;
-      height:72px;
-      background:var(--bg);
-      border-top:1px solid rgba(255,255,255,0.05);
-      display:flex;
-      justify-content:space-around;
-      align-items:center;
-      max-width:420px;
-      margin:0 auto
-    }
-    
-    .nav-item{
-      text-align:center;
-      cursor:pointer;
-      color:var(--muted);
-      font-size:12px;
-      flex:1;
-      padding:8px
-    }
-    
-    .nav-item.active{
-      color:var(--yellow);
-      font-weight:700
-    }
-    
-    .nav-icon{
-      font-size:24px;
-      margin-bottom:4px
-    }
-    
-    .play-center{
-      background:var(--yellow);
-      color:#000;
-      width:50px;
-      height:50px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      font-size:18px;
-      box-shadow:0 4px 12px rgba(255,204,0,0.3)
-    }
-    
-    /* SCREENS */
-    .screen{
-      display:none
-    }
-    
-    .screen.active{
-      display:block
-    }
-    
-    /* RESPONSIVE */
     @media (max-width:420px){
       .app{margin:0}
-      .topbar{padding:0 8px}
-      .banner{margin:8px;padding:12px}
-      .referral{margin:8px;margin-top:0}
-      .match-cards{padding:0 8px}
-      .games-section{padding:0 8px}
     }
   </style>
 </head>
@@ -435,296 +234,145 @@
   <div class="app" id="app">
     <!-- HOME SCREEN -->
     <div id="home" class="screen active">
-      <!-- TOP BAR -->
       <div class="topbar">
-        <div class="logo">LUDO POOL</div>
-        <div class="whatsapp-icon" onclick="openWhatsApp()">💬</div>
-        <button class="wallet-btn" onclick="openWallet()">
-          <span>💰</span>
-          <span id="balanceDisplay">0</span>
-        </button>
+        <div class="logo">🎲 LUDO POOL</div>
+        <button class="wallet-badge" onclick="openWallet()">💰 ৳ 1,250</button>
       </div>
       
-      <!-- BANNER -->
-      <div class="banner">
-        <div class="banner-text">
-          <h3>কিভাবে টাকা এড মানি করবেন?</h3>
-          <button class="banner-btn" onclick="playVideo()">ভিডিওটি দেখুন</button>
-        </div>
-        <div class="banner-phone">📱</div>
-      </div>
+      <div style="margin-top:20px;font-size:16px;font-weight:700;margin-bottom:12px">উপলব্ধ গেমস</div>
       
-      <!-- REFERRAL -->
-      <div class="referral">
-        <div class="referral-header">আপনার রেফারেল কোড</div>
-        <div class="referral-box">
-          <div class="referral-code">436631</div>
-          <div class="referral-meta">
-            <div>🎁 প্রতিটি রেফারে +20 টাকা</div>
-            <div style="margin-top:4px"><a href="#" style="color:var(--yellow);text-decoration:none">রেফারেল লিঙ্ক</a></div>
-          </div>
-          <div class="referral-buttons">
-            <button class="copy" onclick="copyCode()">📋 কোড কপি করুন</button>
-            <button class="share" onclick="shareReferral()">📤 শেয়ার করুন</button>
-          </div>
-        </div>
-      </div>
-      
-      <!-- NOTICE -->
-      <div class="notice">
-        <span class="notice-text">নোটিশঃ</span> লাইভ ম্যাচ
-      </div>
-      
-      <!-- MATCH CARDS -->
-      <div class="section-header">
-        <div class="section-title">লাইভ ম্যাচ</div>
-        <div class="section-badge">16 Live</div>
-      </div>
-      
-      <div class="match-cards">
-        <!-- Card 1: Ludo Matches -->
-        <div class="match-card">
-          <div class="match-card-left">
-            <h4>Ludo Matches</h4>
-            <p>16 Matches Found</p>
-          </div>
-          <div class="match-card-right">
-            <div class="match-card-badge">Live</div>
-            <div class="match-card-logo">👑</div>
-          </div>
+      <div class="games-container">
+        <div class="game-card">
+          <div class="game-emoji">🎲</div>
+          <div class="game-name">Ludo Classic</div>
+          <button class="play-btn" onclick="openWallet()">খেলুন</button>
         </div>
         
-        <!-- Card 2: Auto System -->
-        <div class="match-card">
-          <div class="match-card-left">
-            <h4>একদম লুডো কিং অটো</h4>
-            <p>আনলিমিটেড অটো ম্যাচ</p>
-          </div>
-          <div class="match-card-right">
-            <div class="match-card-badge">AUTO</div>
-            <button class="match-card-share" onclick="shareAuto()">শেয়ার</button>
-          </div>
-        </div>
-      </div>
-      
-      <!-- GAMES SECTION -->
-      <div class="games-section">
-        <div class="section-header" style="padding:0">
-          <div class="section-title">সকল গেমস</div>
-          <div class="section-badge">4 Games</div>
-        </div>
-        
-        <div class="games-grid">
-          <!-- Ludo Classic -->
-          <div class="game-card" onclick="playGame('ludo')">
-            <div class="game-card-image">
-              🎲
-              <div class="game-badge new">NEW</div>
-            </div>
-            <div class="game-card-content">
-              <div class="game-name">Ludo Classic</div>
-              <div class="game-desc">অটো ম্যাচ সিস্টেম</div>
-              <button class="game-play-btn" onclick="event.stopPropagation(); playGame('ludo')">খেলুন</button>
-            </div>
-          </div>
-          
-          <!-- Carrom -->
-          <div class="game-card" onclick="playGame('carrom')">
-            <div class="game-card-image">
-              🎯
-              <div class="game-badge hot">HOT</div>
-            </div>
-            <div class="game-card-content">
-              <div class="game-name">Carrom</div>
-              <div class="game-desc">ক্যারম বোর্ড</div>
-              <button class="game-play-btn" onclick="event.stopPropagation(); playGame('carrom')">খেলুন</button>
-            </div>
-          </div>
-          
-          <!-- 16 Ghuti -->
-          <div class="game-card" onclick="playGame('ghuti')">
-            <div class="game-card-image">
-              🎰
-              <div class="game-badge new">NEW</div>
-            </div>
-            <div class="game-card-content">
-              <div class="game-name">16 Ghuti</div>
-              <div class="game-desc">ঘুটি খেলা</div>
-              <button class="game-play-btn" onclick="event.stopPropagation(); playGame('ghuti')">খেলুন</button>
-            </div>
-          </div>
-          
-          <!-- Snake Ladder -->
-          <div class="game-card" onclick="playGame('snake')">
-            <div class="game-card-image">
-              🐍
-              <div class="game-badge hot">HOT</div>
-            </div>
-            <div class="game-card-content">
-              <div class="game-name">Snake Ladder</div>
-              <div class="game-desc">সাপ ও সিড়ি</div>
-              <button class="game-play-btn" onclick="event.stopPropagation(); playGame('snake')">খেলুন</button>
-            </div>
-          </div>
+        <div class="game-card">
+          <div class="game-emoji">🎯</div>
+          <div class="game-name">Carrom</div>
+          <button class="play-btn" onclick="openWallet()">খেলুন</button>
         </div>
       </div>
     </div>
     
     <!-- WALLET SCREEN -->
-    <div id="wallet" class="screen" style="padding:16px 12px">
-      <div class="topbar" style="position:relative;margin:-16px -12px 16px -12px;padding:0 12px">
-        <div style="cursor:pointer;font-weight:700" onclick="goHome()">◀ ফিরুন</div>
-        <div style="font-weight:700">আমার ওয়ালেট</div>
-        <div style="width:48px"></div>
+    <div id="wallet" class="screen">
+      <div class="topbar">
+        <div class="logo" style="cursor:pointer" onclick="closeWallet()">
+          <span class="back-arrow">◀</span> LUDO POOL
+        </div>
+        <button class="wallet-badge" onclick="closeWallet()">💰 ৳ 1,250</button>
       </div>
       
-      <div style="background:var(--card);border:2px solid var(--border-yellow);padding:16px;border-radius:12px;margin-bottom:16px">
-        <div style="color:var(--muted);font-size:12px">আপনার ব্যালেন্স</div>
-        <div style="font-size:32px;font-weight:700;color:var(--yellow);margin:8px 0">৳ <span id="walletBalance">0</span></div>
-        <button class="wallet-btn" style="background:var(--yellow);color:#000;width:100%;font-weight:700;margin-top:12px;border:none" onclick="openAddMoney()">💳 টাকা যোগ করুন</button>
-      </div>
-      
-      <div style="color:var(--muted)">
-        <div style="font-weight:700;margin-bottom:12px">সর্বশেষ লেনদেন</div>
-        <div id="transactionList" style="display:flex;flex-direction:column;gap:8px">
-          <div style="background:var(--card);padding:12px;border-radius:8px;display:flex;justify-content:space-between;border-left:3px solid var(--green)">
-            <span>রেফারেল বোনাস</span>
-            <span style="color:var(--green)">+ ৳ 50</span>
+      <!-- AVAILABLE BALANCE -->
+      <div class="wallet-card">
+        <div class="wallet-row">
+          <div>
+            <div class="wallet-label">AVAILABLE BALANCE</div>
+            <div class="wallet-amount">৳ 0</div>
           </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- ADD MONEY SCREEN -->
-    <div id="addMoney" class="screen" style="padding:16px 12px">
-      <div class="topbar" style="position:relative;margin:-16px -12px 16px -12px;padding:0 12px">
-        <div style="cursor:pointer;font-weight:700" onclick="goHome()">◀ ফিরুন</div>
-        <div style="font-weight:700">টাকা যোগ করুন</div>
-        <div style="width:48px"></div>
-      </div>
-      
-      <div style="background:var(--card);border:2px solid var(--border-yellow);padding:16px;border-radius:12px;margin-bottom:16px">
-        <div style="color:var(--muted);font-size:12px;margin-bottom:12px">পরিমাণ নির্বাচন করুন:</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <button onclick="addMoney(100)" style="background:var(--card);border:2px solid var(--border-yellow);color:var(--yellow);padding:12px;border-radius:8px;cursor:pointer;font-weight:700">৳ 100</button>
-          <button onclick="addMoney(500)" style="background:var(--card);border:2px solid var(--border-yellow);color:var(--yellow);padding:12px;border-radius:8px;cursor:pointer;font-weight:700">৳ 500</button>
-          <button onclick="addMoney(1000)" style="background:var(--card);border:2px solid var(--border-yellow);color:var(--yellow);padding:12px;border-radius:8px;cursor:pointer;font-weight:700">৳ 1000</button>
-          <button onclick="addMoney(5000)" style="background:var(--card);border:2px solid var(--border-yellow);color:var(--yellow);padding:12px;border-radius:8px;cursor:pointer;font-weight:700">৳ 5000</button>
+          <div class="wallet-link" onclick="viewTransactions()">View Transactions ></div>
         </div>
       </div>
       
-      <div style="background:var(--card);border:2px solid var(--border-yellow);padding:16px;border-radius:12px">
-        <div style="color:var(--muted);font-size:12px;margin-bottom:12px">বা কাস্টম পরিমাণ:</div>
-        <input type="number" id="customAmount" placeholder="পরিমাণ প্রবেশ করুন" style="width:100%;background:rgba(255,204,0,0.1);border:2px solid var(--yellow);color:var(--yellow);padding:12px;border-radius:8px;margin-bottom:12px;font-size:16px">
-        <button onclick="addCustomMoney()" style="background:var(--yellow);color:#000;width:100%;padding:12px;border-radius:8px;border:0;cursor:pointer;font-weight:700">যোগ করুন</button>
-      </div>
-      
-      <div style="margin-top:16px;color:var(--muted);background:var(--card);padding:12px;border-radius:8px;border-left:3px solid var(--yellow)">
-        <div style="font-weight:700;margin-bottom:8px">💡 তথ্য:</div>
-        <div style="font-size:12px">
-          <div>✓ বিকাশ, নগদ, রকেট সব পেমেন্ট গ্রহণযোগ্য</div>
-          <div>✓ সাথে সাথে যাচাই হয়</div>
-          <div>✓ ১০% বোনাস পাবেন প্রথম টপ-আপে</div>
+      <!-- WINNING CASH BALANCE -->
+      <div class="wallet-card">
+        <div class="wallet-row">
+          <div>
+            <div class="wallet-label">WINNING CASH BALANCE</div>
+            <div class="wallet-amount">৳ 0.00</div>
+          </div>
+          <button class="btn-small btn-green" onclick="withdraw()">WITHDRAW</button>
         </div>
       </div>
-    </div>
-  </div>
-  
-  <!-- BOTTOM NAV -->
-  <div class="bottom-nav">
-    <div class="nav-item active" onclick="goHome()">
-      <div class="nav-icon">💬</div>
-      <div>চ্যাট</div>
-    </div>
-    <div class="nav-item" onclick="goHome()" style="flex-basis:0">
-    </div>
-    <div class="play-center" onclick="playLudo()">খেলুন</div>
-    <div class="nav-item" onclick="goHome()" style="flex-basis:0">
-    </div>
-    <div class="nav-item" onclick="openWallet()">
-      <div class="nav-icon">👤</div>
-      <div>আমি</div>
+      
+      <!-- DEPOSIT CASH BALANCE -->
+      <div class="wallet-card">
+        <div class="wallet-row">
+          <div>
+            <div class="wallet-label">DEPOSIT CASH BALANCE</div>
+            <div class="wallet-amount">৳ 0.00</div>
+          </div>
+          <button class="btn-small btn-blue" onclick="addMoney()">ADD MONEY</button>
+        </div>
+      </div>
+      
+      <!-- TRANSFER -->
+      <div class="wallet-card">
+        <div class="wallet-row">
+          <div>
+            <div class="wallet-label">WINNING TO GAMING BALANCE</div>
+          </div>
+          <button class="btn-small btn-purple" onclick="transfer()">TRANSFER</button>
+        </div>
+      </div>
+      
+      <!-- HOW TO ADD MONEY -->
+      <div class="wallet-section-title">কিভাবে টাকা এড করবেন?</div>
+      <div class="help-box">
+        <div class="help-title">HOW TO ADD MONEY?</div>
+        <div class="help-subtitle">কিভাবে টাকা এড করবে</div>
+        <button class="help-btn" onclick="watchVideo()">ভিডিও দেখুন</button>
+      </div>
+      
+      <!-- HOW TO JOIN MATCH -->
+      <div class="wallet-section-title">কিভাবে ম্যাচ এ জইন করবেন?</div>
+      <div class="help-box">
+        <div class="help-title">HOW TO JOIN A MATCH?</div>
+        <div class="help-subtitle">কিভাবে ম্যাচ এ জইন করবেন?</div>
+        <button class="help-btn" onclick="watchVideo()">ভিডিও দেখুন</button>
+      </div>
+      
+      <!-- CONTACT US -->
+      <div class="contact-box">
+        <div class="contact-text">টাকা এড না হলে এখানে মেসেজ দিন</div>
+        <button class="btn-contact" onclick="contactUs()">CONTACT US</button>
+      </div>
     </div>
   </div>
 
   <script>
-    // Global state
-    let userBalance = 0;
-    
-    function show(screenId) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById(screenId).classList.add('active');
-    }
-    
-    function goHome() {
-      show('home');
-    }
-    
     function openWallet() {
-      show('wallet');
-      document.querySelector('.nav-item.active')?.classList.remove('active');
-      document.querySelectorAll('.nav-item')[4].classList.add('active');
+      document.getElementById('home').classList.remove('active');
+      document.getElementById('wallet').classList.add('active');
+      document.querySelector('.back-arrow').style.display = 'inline';
     }
     
-    function openAddMoney() {
-      show('addMoney');
+    function closeWallet() {
+      document.getElementById('wallet').classList.remove('active');
+      document.getElementById('home').classList.add('active');
+      document.querySelector('.back-arrow').style.display = 'none';
     }
     
-    function openWhatsApp() {
-      alert('WhatsApp গ্রুপে যোগদান করুন: wa.me/...');
-    }
-    
-    function playVideo() {
-      alert('ভিডিও দেখুন: কিভাবে টাকা এড মানি করবেন');
-    }
-    
-    function copyCode() {
-      navigator.clipboard.writeText('436631');
-      alert('কোড কপি হয়েছে: 436631');
-    }
-    
-    function shareReferral() {
-      alert('শেয়ার করুন: আমার রেফারেল কোড 436631 - প্রতিটিতে ৳20 পাবেন!');
-    }
-    
-    function shareAuto() {
-      alert('অটো ম্যাচ শেয়ার করুন');
-    }
-    
-    function playGame(game) {
-      alert(`${game.toUpperCase()} খেলছেন...`);
-      show('home');
-    }
-    
-    function playLudo() {
-      alert('লুডো খেলা শুরু করুন...');
-    }
-    
-    function addMoney(amount) {
-      userBalance += amount;
-      updateBalance();
-      alert(`৳${amount} যোগ হয়েছে`);
-      goHome();
-    }
-    
-    function addCustomMoney() {
-      const amount = parseInt(document.getElementById('customAmount').value);
-      if(isNaN(amount) || amount < 10) {
-        alert('সঠিক পরিমাণ প্রবেশ করুন');
-        return;
+    function addMoney() {
+      const amount = prompt('কত টাকা Add করবেন?');
+      if(amount) {
+        alert(`${amount} টাকা এড করা হয়েছে`);
       }
-      addMoney(amount);
-      document.getElementById('customAmount').value = '';
     }
     
-    function updateBalance() {
-      document.getElementById('balanceDisplay').innerText = userBalance;
-      document.getElementById('walletBalance').innerText = userBalance;
+    function withdraw() {
+      alert('Withdraw অপশন শীঘ্রই আসছে');
     }
     
-    // Initialize
-    updateBalance();
-    console.log('LUDO POOL Initialized ✅');
+    function transfer() {
+      alert('Transfer শীঘ্রই উপলব্ধ হবে');
+    }
+    
+    function viewTransactions() {
+      alert('আপনার সকল লেনদেন এখানে দেখা যাবে');
+    }
+    
+    function watchVideo() {
+      alert('ভিডিও চালু হচ্ছে...');
+    }
+    
+    function contactUs() {
+      alert('আমাদের সাথে যোগাযোগ করুন');
+    }
+    
+    console.log('LUDO POOL Wallet Loaded ✅');
   </script>
 </body>
 </html>
