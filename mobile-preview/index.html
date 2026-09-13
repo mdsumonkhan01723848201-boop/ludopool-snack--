@@ -225,8 +225,119 @@
       font-size:12px
     }
     
+    /* MODAL */
+    .modal-overlay{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      background:rgba(0,0,0,0.7);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:1000
+    }
+    
+    .modal-overlay.active{
+      display:flex
+    }
+    
+    .modal{
+      background:var(--bg);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:16px;
+      padding:24px;
+      width:90%;
+      max-width:380px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.8)
+    }
+    
+    .modal-title{
+      font-size:18px;
+      font-weight:700;
+      margin-bottom:16px;
+      text-align:center;
+      color:var(--yellow)
+    }
+    
+    .modal-number{
+      background:#fff;
+      color:#000;
+      font-size:28px;
+      font-weight:700;
+      padding:16px;
+      border-radius:12px;
+      text-align:center;
+      margin-bottom:12px;
+      letter-spacing:2px
+    }
+    
+    .modal-instruction{
+      background:var(--card);
+      color:#fff;
+      padding:12px;
+      border-radius:8px;
+      font-size:13px;
+      margin-bottom:16px;
+      text-align:center;
+      line-height:1.5
+    }
+    
+    .modal-input-group{
+      margin-bottom:12px
+    }
+    
+    .modal-input-label{
+      font-size:12px;
+      font-weight:700;
+      color:var(--muted);
+      margin-bottom:6px;
+      display:block
+    }
+    
+    .modal-input{
+      width:100%;
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.1);
+      color:#fff;
+      padding:12px;
+      border-radius:8px;
+      font-size:14px
+    }
+    
+    .modal-input::placeholder{
+      color:#666
+    }
+    
+    .modal-submit{
+      width:100%;
+      background:var(--yellow);
+      color:#000;
+      padding:12px;
+      border-radius:8px;
+      border:0;
+      cursor:pointer;
+      font-weight:700;
+      font-size:14px;
+      margin-bottom:8px
+    }
+    
+    .modal-close{
+      width:100%;
+      background:var(--card);
+      color:#fff;
+      padding:12px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,0.1);
+      cursor:pointer;
+      font-weight:700;
+      font-size:14px
+    }
+    
     @media (max-width:420px){
       .app{margin:0}
+      .modal{width:95%}
     }
   </style>
 </head>
@@ -294,7 +405,7 @@
             <div class="wallet-label">DEPOSIT CASH BALANCE</div>
             <div class="wallet-amount">৳ 0.00</div>
           </div>
-          <button class="btn-small btn-blue" onclick="addMoney()">ADD MONEY</button>
+          <button class="btn-small btn-blue" onclick="openAddMoneyModal()">ADD MONEY</button>
         </div>
       </div>
       
@@ -331,6 +442,32 @@
       </div>
     </div>
   </div>
+  
+  <!-- ADD MONEY MODAL -->
+  <div class="modal-overlay" id="addMoneyModal">
+    <div class="modal">
+      <div class="modal-title">টাকা যোগ করুন</div>
+      
+      <div class="modal-number">01779328777</div>
+      
+      <div class="modal-instruction">
+        01779328777 এই নাম্বারে Send Money করুন - bKash, Nagad, Rocket সব আছে
+      </div>
+      
+      <div class="modal-input-group">
+        <label class="modal-input-label">পরিমাণ (Amount)</label>
+        <input type="number" id="amountInput" class="modal-input" placeholder="উদা: 500" min="1">
+      </div>
+      
+      <div class="modal-input-group">
+        <label class="modal-input-label">ট্রানজেকশন ID (Transaction ID)</label>
+        <input type="text" id="transactionInput" class="modal-input" placeholder="উদা: TXN123456789">
+      </div>
+      
+      <button class="modal-submit" onclick="submitPayment()">জমা দিন</button>
+      <button class="modal-close" onclick="closeAddMoneyModal()">বাতিল</button>
+    </div>
+  </div>
 
   <script>
     function openWallet() {
@@ -345,11 +482,27 @@
       document.querySelector('.back-arrow').style.display = 'none';
     }
     
-    function addMoney() {
-      const amount = prompt('কত টাকা Add করবেন?');
-      if(amount) {
-        alert(`${amount} টাকা এড করা হয়েছে`);
+    function openAddMoneyModal() {
+      document.getElementById('addMoneyModal').classList.add('active');
+      document.getElementById('amountInput').value = '';
+      document.getElementById('transactionInput').value = '';
+    }
+    
+    function closeAddMoneyModal() {
+      document.getElementById('addMoneyModal').classList.remove('active');
+    }
+    
+    function submitPayment() {
+      const amount = document.getElementById('amountInput').value;
+      const transactionId = document.getElementById('transactionInput').value;
+      
+      if(!amount || !transactionId) {
+        alert('অনুগ্রহ করে সব তথ্য পূরণ করুন');
+        return;
       }
+      
+      alert(`পেমেন্ট সফল হয়েছে!\nপরিমাণ: ৳${amount}\nট্রানজেকশন ID: ${transactionId}\n\nআপনার অ্যাকাউন্টে কিছুক্ষণের মধ্যে টাকা যুক্ত হবে`);
+      closeAddMoneyModal();
     }
     
     function withdraw() {
@@ -372,7 +525,14 @@
       alert('আমাদের সাথে যোগাযোগ করুন');
     }
     
-    console.log('LUDO POOL Wallet Loaded ✅');
+    // Close modal on overlay click
+    document.getElementById('addMoneyModal').addEventListener('click', function(e) {
+      if(e.target === this) {
+        closeAddMoneyModal();
+      }
+    });
+    
+    console.log('LUDO POOL Wallet System Loaded ✅');
   </script>
 </body>
 </html>
