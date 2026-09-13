@@ -8,46 +8,94 @@
     :root{--bg:#0B0E1A;--card:#141421;--purple:#6F4DF5;--accent:#FFD44D;--muted:#b9c0d3;color-scheme:dark}
     html,body{height:100%;margin:0;background:var(--bg);font-family:Inter,system-ui,Arial}
     .app{max-width:420px;margin:16px auto;padding-bottom:96px;color:#fff}
-    .topbar{display:flex;justify-content:space-between;align-items:center;height:56px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;height:56px;padding:0 12px}
     .logo{font-weight:700;font-size:20px}
-    .wallet{background:var(--purple);padding:6px 10px;border-radius:8px}
+    .wallet{background:var(--purple);padding:6px 10px;border-radius:8px;cursor:pointer}
 
     .hero{display:flex;gap:12px;background:var(--card);padding:12px;border-radius:12px}
     .hero .text{flex:1}
     .hero h3{margin:0 0 6px 0}
-    .btn{background:var(--purple);color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;border:0}
+    .btn{background:var(--purple);color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;border:0;font-weight:600}
+    .btn-secondary{background:#1f2332;color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.1)}
 
-    .section{margin-top:18px}
+    .section{margin-top:18px;padding:0 12px}
     .section .head{display:flex;justify-content:space-between;align-items:center;padding:0 4px}
     .cards{display:flex;gap:12px;overflow:auto;padding:12px 4px}
     .match-card{min-width:240px;background:var(--card);padding:12px;border-radius:12px;display:flex;justify-content:space-between;align-items:center}
     .badge{background:#FF6B6B;padding:6px 8px;border-radius:12px;font-size:12px}
 
-    .grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+    .grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;padding:0 12px}
     .tile{width:calc(50% - 6px);background:var(--card);padding:8px;border-radius:12px}
     .tile img{width:100%;height:80px;border-radius:8px;object-fit:cover}
     .play-pill{background:var(--purple);padding:6px 10px;border-radius:12px;color:#fff;display:inline-block;margin-top:8px;cursor:pointer}
 
     .bottom{position:fixed;left:0;right:0;bottom:0;height:72px;background:var(--bg);border-top:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:space-around}
-    .nav{text-align:center;color:#b9c0d3}
+    .nav{text-align:center;color:#b9c0d3;cursor:pointer;padding:12px}
     .nav.active{color:var(--accent);font-weight:700}
 
     /* screens */
-    .screen{display:none}
+    .screen{display:none;padding:0 12px}
     .screen.active{display:block}
 
     /* waiting / game */
-    .players{display:flex;gap:12px;justify-content:space-around;margin-top:12px}
-    .player{width:80px;background:rgba(255,255,255,0.03);padding:10px;border-radius:12px;text-align:center}
-    .start{background:var(--accent);color:#081018;padding:12px;border-radius:12px;border:0;margin-top:12px;cursor:pointer;width:100%}
+    .players{display:flex;gap:12px;justify-content:space-around;margin-top:12px;flex-wrap:wrap}
+    .player{width:80px;background:rgba(255,255,255,0.03);padding:10px;border-radius:12px;text-align:center;border:2px solid transparent}
+    .player.active{border-color:var(--accent)}
+    .player-avatar{width:48px;height:48px;border-radius:24px;line-height:48px;text-align:center;font-weight:700;margin:0 auto}
+    .start{background:var(--accent);color:#081018;padding:12px;border-radius:12px;border:0;margin-top:12px;cursor:pointer;width:100%;font-weight:700;font-size:16px}
 
-    .board{height:calc(100vh - 320px);background:rgba(255,255,255,0.02);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-top:12px}
-    .dice{margin-top:12px;display:flex;align-items:center;gap:12px}
-    .dice button{background:var(--purple);color:#fff;padding:12px;border-radius:12px;border:0;cursor:pointer}
+    .ludo-board{height:500px;background:linear-gradient(135deg, #1a2540 0%, #2a3f60 100%);border-radius:12px;display:grid;grid-template-columns:repeat(15,1fr);grid-template-rows:repeat(15,1fr);gap:1px;padding:8px;margin-top:12px;box-shadow:inset 0 0 20px rgba(0,0,0,0.5)}
+    .board-cell{background:rgba(255,255,255,0.02);border-radius:2px;position:relative;border:1px solid rgba(255,255,255,0.05)}
+    .board-cell.home{background:rgba(111,77,245,0.2)}
+    .board-cell.home.yellow{background:rgba(255,212,77,0.2)}
+    .board-cell.home.green{background:rgba(111,227,155,0.2)}
+    .board-cell.home.red{background:rgba(255,107,107,0.2)}
+    .board-cell.safe{border:2px solid rgba(255,255,255,0.3)}
+    .token{width:32px;height:32px;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);cursor:grab;border:3px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;user-select:none}
+    .token:hover{transform:translate(-50%,-50%) scale(1.1)}
+    .token.red{background:#FF6B6B}
+    .token.yellow{background:#FFD44D;color:#000}
+    .token.green{background:#6FE39B}
+    .token.purple{background:#9B7BFF}
+    .token.selected{box-shadow:0 0 12px rgba(255,255,255,0.8),inset 0 0 4px rgba(255,255,255,0.4)}
 
-    .center-wrap{max-width:420px;margin:16px auto}
+    .dice-section{margin-top:12px;text-align:center;background:var(--card);padding:12px;border-radius:12px}
+    .dice-display{width:60px;height:60px;background:linear-gradient(135deg,var(--purple),#9b7bff);border-radius:8px;margin:12px auto;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(111,77,245,0.4);transition:transform 0.3s}
+    .dice-display:hover{transform:scale(1.05)}
+    .dice-display.rolling{animation:roll 0.5s}
+    @keyframes roll{0%{transform:rotateX(0) rotateY(0) scale(1.05)} 50%{transform:rotateX(180deg) rotateY(180deg)} 100%{transform:rotateX(0) rotateY(0) scale(1.05)}}
 
-    /* small screens fix */
+    .game-info{background:var(--card);padding:12px;border-radius:12px;margin-top:12px;font-size:14px}
+    .game-info div{margin:6px 0}
+    .game-info .label{color:var(--muted);font-size:12px}
+
+    .wallet-modal{background:var(--card);padding:16px;border-radius:12px;margin-top:12px}
+    .wallet-card{background:linear-gradient(135deg,var(--purple),#9b7bff);padding:16px;border-radius:12px;margin-bottom:16px;box-shadow:0 4px 12px rgba(111,77,245,0.3)}
+    .wallet-balance{font-size:28px;font-weight:700;margin:8px 0}
+    .payment-buttons{display:flex;gap:8px;margin-top:12px}
+    .payment-buttons .btn{flex:1;background:#1f2332;border:1px solid rgba(255,255,255,0.1);color:#fff;padding:12px}
+    .payment-buttons .btn.active{background:var(--purple);border:1px solid var(--purple)}
+
+    .transaction-list{margin-top:12px}
+    .transaction{display:flex;justify-content:space-between;padding:12px;background:rgba(255,255,255,0.02);border-radius:8px;margin-bottom:8px}
+    .transaction .name{color:var(--muted)}
+    .transaction .amount.add{color:#2ED573}
+    .transaction .amount.remove{color:#FF6B6B}
+
+    .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:1000}
+    .modal-overlay.active{display:flex}
+    .modal{background:var(--bg);border-radius:12px;padding:20px;max-width:360px;width:90%;border:1px solid rgba(255,255,255,0.1)}
+    .modal-title{font-size:18px;font-weight:700;margin-bottom:16px}
+    .modal-input{width:100%;background:var(--card);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:12px;border-radius:8px;margin-bottom:12px;font-size:16px}
+    .modal-buttons{display:flex;gap:8px}
+    .modal-buttons button{flex:1;padding:12px;border-radius:8px;border:0;font-weight:700;cursor:pointer}
+    .modal-buttons .confirm{background:var(--accent);color:#000}
+    .modal-buttons .cancel{background:#1f2332;color:#fff}
+
+    .moves-list{background:var(--card);padding:12px;border-radius:12px;margin-top:12px;font-size:14px;max-height:200px;overflow-y:auto}
+    .move-item{padding:8px;background:rgba(255,255,255,0.02);border-radius:6px;margin-bottom:6px;cursor:pointer;border-left:3px solid var(--purple)}
+    .move-item:hover{background:rgba(255,255,255,0.05)}
+
     @media (max-width:420px){.app{margin:8px}}
   </style>
 </head>
@@ -58,98 +106,504 @@
       <div class="topbar">
         <div class="logo">LudoPool</div>
         <div style="display:flex;gap:8px;align-items:center">
-          <button class="btn" onclick="openWallet()">৳ 120</button>
+          <button class="wallet" onclick="show('wallet', document.querySelectorAll('.nav')[2])">৳ <span id="balance">120</span></button>
         </div>
       </div>
 
       <div class="hero">
         <div class="text">
-          <h3>কিভাবে টাকা অ্যাড মানি করবেন?</h3>
-          <div style="color:var(--muted)">রেফার করে বন্ধুদের আনার মাধ্যমে বোনাস পান</div>
-          <div style="margin-top:8px"><button class="btn" onclick="share()">শেয়ার করুন</button></div>
+          <h3>লুডো খেলুন এবং জিতুন!</h3>
+          <div style="color:var(--muted)">বন্ধুদের সাথে খেলুন, টাকা জিতুন, পেমেন্ট পান</div>
+          <div style="margin-top:8px"><button class="btn" onclick="openWaiting('quick')">এখনই খেলুন</button></div>
         </div>
         <div style="width:100px;height:100px;border-radius:8px;background:linear-gradient(135deg,var(--purple),#9b7bff)"></div>
       </div>
 
       <div class="section">
-        <div class="head"><div style="font-weight:700">লাইভ ম্যাচ</div><div style="color:var(--muted)">16 Live</div></div>
+        <div class="head"><div style="font-weight:700">লাইভ ম্যাচ</div><div style="color:var(--muted)">16 চলছে</div></div>
         <div class="cards" id="live-cards">
-          <div class="match-card"><div><div style="font-weight:700">Ludo Matches</div><div style="color:var(--muted)">16 Matches Found</div></div><div><div class="badge">Live</div><div style="height:8px"></div><button class="play-pill" onclick="openWaiting('match_123')">Play</button></div></div>
-          <div class="match-card"><div><div style="font-weight:700">Auto Ludo King</div><div style="color:var(--muted)">Auto Matches</div></div><div><div class="badge">Auto</div><div style="height:8px"></div><button class="play-pill" onclick="openWaiting('match_456')">Play</button></div></div>
+          <div class="match-card"><div><div style="font-weight:700">লুডো ক্লাসিক</div><div style="color:var(--muted)">16 টি ম্যাচ</div></div><div><div class="badge">Live</div></div></div>
+          <div class="match-card"><div><div style="font-weight:700">অটো লুডো</div><div style="color:var(--muted)">স্বয়ংক্রিয়</div></div><div><div class="badge">Auto</div></div></div>
         </div>
       </div>
 
       <div class="section">
-        <div class="head"><div style="font-weight:700">সকল গেমস</div><div style="color:var(--muted)">4 Games</div></div>
+        <div class="head"><div style="font-weight:700">সকল গেমস</div><div style="color:var(--muted)">4 গেম</div></div>
         <div class="grid">
-          <div class="tile"><img src="https://images.unsplash.com/photo-1598136494886-6e56f6c5f3d9?auto=format&fit=crop&w=400&q=60"/><div style="font-weight:700;margin-top:8px">Ludo Classic</div><div style="margin-top:6px"><span class="play-pill" onclick="openWaiting('ludo_tile')">Play</span></div></div>
-          <div class="tile"><img src="https://images.unsplash.com/photo-1544015568-32f5f1a5a7d6?auto=format&fit=crop&w=400&q=60"/><div style="font-weight:700;margin-top:8px">Carrom</div><div style="margin-top:6px"><span class="play-pill" onclick="openWaiting('carrom_tile')">Play</span></div></div>
-          <div class="tile"><img src="https://images.unsplash.com/photo-1564866657318-3bb5db6b6f9c?auto=format&fit=crop&w=400&q=60"/><div style="font-weight:700;margin-top:8px">16 Ghuti</div><div style="margin-top:6px"><span class="play-pill" onclick="openWaiting('ghuti_tile')">Play</span></div></div>
-          <div class="tile"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=60"/><div style="font-weight:700;margin-top:8px">Snake</div><div style="margin-top:6px"><span class="play-pill" onclick="openWaiting('snake_tile')">Play</span></div></div>
+          <div class="tile"><img src="https://images.unsplash.com/photo-1598136494886-6e56f6c5f3d9?auto=format&fit=crop&w=400&q=60"/><div style="font-weight:700;margin-top:8px">Ludo Classic</div><div class="play-pill" onclick="startQuickGame()">খেলুন</div></div>
+          <div class="tile"><img src="https://images.unsplash.com/photo-1544015568-32f5f1a5a7d6?auto=format&fit=crop&w=400&q=60"/><div style="font-weight:700;margin-top:8px">Carrom</div><div class="play-pill">শীঘ্রই</div></div>
+          <div class="tile"><img src="https://images.unsplash.com/photo-1564866657318-3bb5db6b6f9c?auto=format&fit=crop&w=400&q=60"/><div style="font-weight:700;margin-top:8px">16 Ghuti</div><div class="play-pill">শীঘ্রই</div></div>
+          <div class="tile"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=60"/><div style="font-weight:700;margin-top:8px">Snake</div><div class="play-pill">শীঘ্রই</div></div>
         </div>
       </div>
     </div>
 
     <!-- WAITING SCREEN -->
     <div id="waiting" class="screen">
-      <div class="topbar"><div style="cursor:pointer" onclick="goHome()">◀ Back</div><div style="font-weight:700">Waiting Room</div><div style="width:48px"></div></div>
-      <div class="players">
-        <div class="player"><div style="width:48px;height:48px;border-radius:24px;background:var(--purple);line-height:48px;text-align:center;font-weight:700">Y</div><div style="margin-top:8px">You</div><div style="color:var(--muted);margin-top:6px">Ready</div></div>
-        <div class="player"><div style="width:48px;height:48px;border-radius:24px;background:#ffb86b;line-height:48px;text-align:center;font-weight:700">A</div><div style="margin-top:8px">Ali</div><div style="color:var(--muted);margin-top:6px">Ready</div></div>
-        <div class="player"><div style="width:48px;height:48px;border-radius:24px;background:#6fe39b;line-height:48px;text-align:center;font-weight:700">R</div><div style="margin-top:8px">Rana</div><div style="color:var(--muted);margin-top:6px">Ready</div></div>
-        <div class="player"><div style="width:48px;height:48px;border-radius:24px;background:#9b7bff;line-height:48px;text-align:center;font-weight:700">M</div><div style="margin-top:8px">Mitu</div><div style="color:var(--muted);margin-top:6px">Ready</div></div>
+      <div class="topbar"><div style="cursor:pointer" onclick="goHome()">◀ ফিরুন</div><div style="font-weight:700">খেলোয়াড় নির্বাচন</div><div style="width:48px"></div></div>
+      <div style="margin-top:12px;color:var(--muted)">আপনার রঙ নির্বাচন করুন:</div>
+      <div class="players" id="playerSelect">
+        <div class="player" onclick="selectPlayer(0, this)">
+          <div class="player-avatar" style="background:#FF6B6B">Y</div>
+          <div style="margin-top:8px;font-size:12px">লাল</div>
+        </div>
+        <div class="player" onclick="selectPlayer(1, this)">
+          <div class="player-avatar" style="background:#FFD44D;color:#000">A</div>
+          <div style="margin-top:8px;font-size:12px">হলুদ</div>
+        </div>
+        <div class="player" onclick="selectPlayer(2, this)">
+          <div class="player-avatar" style="background:#6FE39B">R</div>
+          <div style="margin-top:8px;font-size:12px">সবুজ</div>
+        </div>
+        <div class="player" onclick="selectPlayer(3, this)">
+          <div class="player-avatar" style="background:#9B7BFF">M</div>
+          <div style="margin-top:8px;font-size:12px">বেগুনি</div>
+        </div>
       </div>
-      <div style="padding:16px"><button class="start" onclick="startMatch()">Start Match</button></div>
+      <div style="margin-top:16px"><button class="start" onclick="startMatch()">খেলা শুরু করুন</button></div>
     </div>
 
     <!-- GAME SCREEN -->
     <div id="game" class="screen">
-      <div class="topbar"><div style="cursor:pointer" onclick="leaveMatch()">Leave</div><div style="font-weight:700">Match • 4 Players</div><div style="width:48px"></div></div>
-      <div class="board">Ludo Board Preview</div>
-      <div class="dice" style="justify-content:center">
-        <div style="color:var(--muted);text-align:center">Dice: <span id="diceValue">1</span></div>
-        <button onclick="rollDice()">Roll Dice</button>
+      <div class="topbar"><div style="cursor:pointer;font-weight:700" onclick="leaveMatch()">◀ ছেড়ে যান</div><div style="font-weight:700">লুডো গেম</div><div style="width:48px"></div></div>
+      
+      <div class="ludo-board" id="ludoBoard"></div>
+      
+      <div class="game-info">
+        <div><span class="label">আপনার টার্ন:</span> <span id="currentPlayer">লাল খেলোয়াড়</span></div>
+        <div><span class="label">ডাইস:</span> <span id="lastDiceValue">-</span></div>
+        <div><span class="label">অনুমোদিত পদক্ষেপ:</span> <span id="movesAllowed">0</span></div>
       </div>
-      <div style="padding:12px;color:var(--muted)">
-        <div style="font-weight:700;margin-bottom:8px">Allowed Moves / Hints</div>
-        <div>• Move token A to 7</div>
-        <div>• Attack opponent at B</div>
+
+      <div class="dice-section">
+        <div>ডাইস রোল করুন</div>
+        <div class="dice-display" id="diceDisplay" onclick="rollDice()">🎲</div>
+        <button class="btn" onclick="rollDice()" style="width:100%;margin-top:8px">রোল করুন (R)</button>
+      </div>
+
+      <div class="moves-list" id="movesList">
+        <div style="color:var(--muted);text-align:center;padding:20px">কোন পদক্ষেপ উপলব্ধ নেই</div>
       </div>
     </div>
 
     <!-- WALLET SCREEN -->
     <div id="wallet" class="screen">
-      <div style="padding:16px;background:var(--card);border-radius:12px">
-        <div style="color:var(--muted)">Your Balance</div>
-        <div style="font-size:28px;font-weight:700;margin-top:6px">৳ <span id="bal">120</span></div>
-        <div style="margin-top:10px;display:flex;gap:8px"><button class="btn" onclick="topUp()">Top-up</button><button class="btn" onclick="withdraw()">Withdraw</button></div>
-      </div>
-      <div style="margin-top:16px;color:var(--muted)">
-        <div style="font-weight:700;margin-bottom:8px">Transactions</div>
-        <div style="display:flex;justify-content:space-between;padding:8px 0"><div>Top-up</div><div>৳ 200</div></div>
-        <div style="display:flex;justify-content:space-between;padding:8px 0"><div>Win</div><div style="color:#2ED573">৳ 500</div></div>
+      <div class="topbar"><div></div><div style="font-weight:700">আমার ওয়ালেট</div><div style="width:48px"></div></div>
+      
+      <div class="wallet-modal">
+        <div class="wallet-card">
+          <div style="color:var(--muted);font-size:14px">আপনার ব্যালেন্স</div>
+          <div class="wallet-balance">৳ <span id="walletBalance">120</span></div>
+          <div style="color:var(--muted);font-size:12px">Available for play</div>
+        </div>
+
+        <div style="font-weight:700;margin-bottom:12px">অর্থ যোগ করুন:</div>
+        <div class="payment-buttons">
+          <button class="btn active" onclick="selectPayment('bkash')">
+            <div style="font-size:14px">bKash</div>
+            <div style="font-size:12px;margin-top:4px">01700000000</div>
+          </button>
+          <button class="btn" onclick="selectPayment('nagad')">
+            <div style="font-size:14px">Nagad</div>
+            <div style="font-size:12px;margin-top:4px">01900000000</div>
+          </button>
+        </div>
+
+        <button class="start" onclick="openAddMoneyModal()" style="margin-top:12px">টাকা যোগ করুন</button>
+
+        <div style="margin-top:16px;color:var(--muted)">
+          <div style="font-weight:700;margin-bottom:12px">সর্বশেষ লেনদেন</div>
+          <div id="transactionList" class="transaction-list">
+            <div class="transaction">
+              <span class="name">বোনাস ক্রেডিট</span>
+              <span class="amount add">+ ৳ 50</span>
+            </div>
+            <div class="transaction">
+              <span class="name">গেম বিড</span>
+              <span class="amount remove">- ৳ 100</span>
+            </div>
+            <div class="transaction">
+              <span class="name">বিজয় পুরস্কার</span>
+              <span class="amount add">+ ৳ 250</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
   </div>
 
+  <!-- ADD MONEY MODAL -->
+  <div class="modal-overlay" id="addMoneyModal">
+    <div class="modal">
+      <div class="modal-title">টাকা যোগ করুন</div>
+      <div style="color:var(--muted);font-size:14px;margin-bottom:16px">পরিমাণ প্রবেশ করুন (50 - 50000 টাকা)</div>
+      <input type="number" class="modal-input" id="amountInput" placeholder="উদা: 500" min="50" max="50000">
+      <div style="margin-bottom:12px;color:var(--muted);font-size:12px">
+        <div style="margin:8px 0"><strong>সাধারণ পরিমাণ:</strong></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span onclick="setAmount(100)" style="cursor:pointer;padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:6px">100</span>
+          <span onclick="setAmount(500)" style="cursor:pointer;padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:6px">500</span>
+          <span onclick="setAmount(1000)" style="cursor:pointer;padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:6px">1000</span>
+          <span onclick="setAmount(5000)" style="cursor:pointer;padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:6px">5000</span>
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button class="confirm" onclick="confirmAddMoney()">যোগ করুন</button>
+        <button class="cancel" onclick="closeAddMoneyModal()">বাতিল</button>
+      </div>
+    </div>
+  </div>
+
   <div class="bottom">
-    <div class="nav active" onclick="show('home', this)">Play</div>
-    <div style="text-align:center"><div style="background:#fff;padding:10px 18px;border-radius:24px;cursor:pointer;color:var(--purple);font-weight:700" onclick="openWaiting('quick')">Play</div></div>
-    <div class="nav" onclick="show('wallet', this)">Me</div>
+    <div class="nav active" onclick="show('home', this)">খেলা</div>
+    <div style="text-align:center"><div style="background:#fff;padding:10px 18px;border-radius:24px;cursor:pointer;color:var(--purple);font-weight:700" onclick="startQuickGame()">খেলুন</div></div>
+    <div class="nav" onclick="show('wallet', this)">আমার</div>
   </div>
 
   <script>
-    function show(id, el){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active')); if(el) el.classList.add('active'); }
-    function openWaiting(id){ show('waiting'); }
-    function goHome(){ show('home'); }
-    function startMatch(){ show('game'); }
-    function leaveMatch(){ show('home'); }
-    function openWallet(){ show('wallet', document.querySelectorAll('.nav')[2]); }
-    function share(){ alert('Share referral code!'); }
-    function topUp(){ alert('Top-up flow (stub)'); }
-    function withdraw(){ alert('Withdraw flow (stub)'); }
-    function rollDice(){ const r = Math.floor(Math.random()*6)+1; document.getElementById('diceValue').innerText = r; }
+    // Game State
+    let gameState = {
+      players: [
+        { id: 0, name: 'আপনি', color: 'red', tokens: [0,0,0,0], home: false, completed: false },
+        { id: 1, name: 'AI-1', color: 'yellow', tokens: [0,0,0,0], home: false, completed: false },
+        { id: 2, name: 'AI-2', color: 'green', tokens: [0,0,0,0], home: false, completed: false },
+        { id: 3, name: 'AI-3', color: 'purple', tokens: [0,0,0,0], home: false, completed: false }
+      ],
+      currentPlayer: 0,
+      diceValue: 0,
+      lastDiceRoll: 0,
+      selectedToken: -1,
+      gameActive: false,
+      balance: 120,
+      paymentMethod: 'bkash',
+      boardPath: generateBoardPath()
+    };
+
+    // Board path: 52 cells + 4 homes (total 56 positions per player)
+    function generateBoardPath() {
+      let path = [];
+      // Main path (52 cells)
+      for(let i = 0; i < 52; i++) {
+        path.push({row: Math.floor(i/4), col: (i%4)*3 + (Math.floor(i/4)%2===0?0:2)});
+      }
+      return path;
+    }
+
+    // Board Layout
+    function initBoard() {
+      const board = document.getElementById('ludoBoard');
+      board.innerHTML = '';
+      
+      // Create 15x15 grid
+      for(let r = 0; r < 15; r++) {
+        for(let c = 0; c < 15; c++) {
+          let cell = document.createElement('div');
+          cell.className = 'board-cell';
+          cell.id = `cell-${r}-${c}`;
+          
+          // Home zones
+          if(r < 6 && c < 6) cell.classList.add('home', 'red');
+          else if(r < 6 && c >= 9) cell.classList.add('home', 'yellow');
+          else if(r >= 9 && c >= 9) cell.classList.add('home', 'green');
+          else if(r >= 9 && c < 6) cell.classList.add('home', 'purple');
+          
+          // Safe spots
+          if((r===0 && c===6) || (r===6 && c===0) || (r===6 && c===14) || (r===14 && c===6) || (r===14 && c===8) || (r===8 && c===14) || (r===8 && c===0) || (r===0 && c===8)) 
+            cell.classList.add('safe');
+          
+          board.appendChild(cell);
+        }
+      }
+      
+      renderTokens();
+    }
+
+    function renderTokens() {
+      // Clear existing tokens
+      document.querySelectorAll('.token').forEach(t => t.remove());
+      
+      gameState.players.forEach((player, pIdx) => {
+        player.tokens.forEach((pos, tIdx) => {
+          if(pos === 0 && player.home) return; // Token in home base
+          
+          let cell = getTokenCell(pIdx, pos);
+          let token = document.createElement('div');
+          token.className = `token ${player.color}`;
+          token.innerText = `${player.color[0].toUpperCase()}${tIdx+1}`;
+          token.onclick = () => selectToken(pIdx, tIdx);
+          
+          if(pIdx === gameState.currentPlayer && gameState.selectedToken === tIdx) 
+            token.classList.add('selected');
+          
+          cell.appendChild(token);
+        });
+      });
+    }
+
+    function getTokenCell(playerIdx, pos) {
+      // Calculate cell based on player position
+      let row, col;
+      
+      if(pos < 52) {
+        // On main board
+        let boardIdx = (playerIdx * 13 + pos) % 52;
+        if(playerIdx === 0) { // Red: starts at 0,7
+          if(pos < 13) { row = 7; col = pos; }
+          else if(pos < 26) { row = pos - 13; col = 7; }
+          else { row = 0; col = 7 - (pos - 26); }
+        }
+        else if(playerIdx === 1) { // Yellow: starts at 7,14
+          if(pos < 13) { row = Math.floor(pos/13)*7; col = 14 - pos % 13; }
+          else if(pos < 26) { row = 14; col = 7 - (pos - 13); }
+          else { row = 14 - (pos - 26); col = 0; }
+        }
+        else if(playerIdx === 2) { // Green: starts at 14,7
+          if(pos < 13) { row = 14; col = 7 + pos % 13; }
+          else if(pos < 26) { row = 14 - (pos - 13); col = 14; }
+          else { row = 0; col = 14 - (pos - 26); }
+        }
+        else { // Purple: starts at 7,0
+          if(pos < 13) { row = pos % 13; col = 0; }
+          else if(pos < 26) { row = 0; col = pos - 13; }
+          else { row = pos - 26; col = 14; }
+        }
+      } else {
+        // In home zone (last 4 cells)
+        row = playerIdx < 2 ? 1 + (pos - 52) * 2 : 12 - (pos - 52) * 2;
+        col = playerIdx % 2 === 0 ? 1 + (pos - 52) * 2 : 12 - (pos - 52) * 2;
+      }
+      
+      return document.getElementById(`cell-${Math.max(0, Math.min(14, row))}-${Math.max(0, Math.min(14, col))}`);
+    }
+
+    function selectToken(playerIdx, tokenIdx) {
+      if(playerIdx !== gameState.currentPlayer) return;
+      if(gameState.diceValue === 0) return;
+      
+      gameState.selectedToken = gameState.selectedToken === tokenIdx ? -1 : tokenIdx;
+      renderTokens();
+      showMoves();
+    }
+
+    function showMoves() {
+      let movesList = document.getElementById('movesList');
+      movesList.innerHTML = '';
+      
+      if(gameState.diceValue === 0) {
+        movesList.innerHTML = '<div style="color:var(--muted);text-align:center;padding:20px">ডাইস রোল করুন!</div>';
+        return;
+      }
+      
+      let player = gameState.players[gameState.currentPlayer];
+      let moves = [];
+      
+      player.tokens.forEach((pos, idx) => {
+        let newPos = pos + gameState.diceValue;
+        if(newPos <= 56) {
+          moves.push({ tokenIdx: idx, fromPos: pos, toPos: newPos });
+        }
+      });
+      
+      if(moves.length === 0) {
+        movesList.innerHTML = '<div style="color:var(--muted);text-align:center;padding:20px">কোন বৈধ পদক্ষেপ নেই</div>';
+        return;
+      }
+      
+      moves.forEach(move => {
+        let item = document.createElement('div');
+        item.className = 'move-item';
+        item.innerText = `${player.color} টোকেন ${move.tokenIdx + 1}: ${move.fromPos} → ${move.toPos}`;
+        item.onclick = () => moveToken(move.tokenIdx, move.toPos);
+        movesList.appendChild(item);
+      });
+      
+      document.getElementById('movesAllowed').innerText = moves.length;
+    }
+
+    function moveToken(tokenIdx, newPos) {
+      let player = gameState.players[gameState.currentPlayer];
+      player.tokens[tokenIdx] = newPos;
+      
+      // Check for capture
+      checkCapture(gameState.currentPlayer, newPos);
+      
+      // Check for win
+      if(newPos === 56) {
+        player.completed = true;
+        alert(`${player.name} জিতেছেন! 🎉`);
+      }
+      
+      gameState.diceValue = 0;
+      gameState.selectedToken = -1;
+      document.getElementById('lastDiceValue').innerText = '-';
+      
+      nextTurn();
+      renderTokens();
+      showMoves();
+    }
+
+    function checkCapture(playerIdx, pos) {
+      if(pos >= 52) return; // No capture in home zone
+      
+      gameState.players.forEach((player, pIdx) => {
+        if(pIdx === playerIdx) return;
+        player.tokens.forEach((tokenPos, tIdx) => {
+          if(tokenPos === pos && tokenPos < 52) {
+            player.tokens[tIdx] = 0; // Send to home
+            gameState.balance += 10; // Reward for capture
+            document.getElementById('balance').innerText = gameState.balance;
+            document.getElementById('walletBalance').innerText = gameState.balance;
+          }
+        });
+      });
+    }
+
+    function rollDice() {
+      if(gameState.diceValue !== 0) return;
+      
+      let diceDisplay = document.getElementById('diceDisplay');
+      diceDisplay.classList.add('rolling');
+      
+      setTimeout(() => {
+        gameState.diceValue = Math.floor(Math.random() * 6) + 1;
+        gameState.lastDiceRoll = gameState.diceValue;
+        document.getElementById('lastDiceValue').innerText = gameState.diceValue;
+        diceDisplay.innerText = gameState.diceValue;
+        diceDisplay.classList.remove('rolling');
+        showMoves();
+      }, 500);
+    }
+
+    function nextTurn() {
+      if(gameState.lastDiceRoll === 6) {
+        alert('আরও একটি টার্ন পান! 🎲');
+      } else {
+        gameState.currentPlayer = (gameState.currentPlayer + 1) % 4;
+      }
+      
+      updatePlayerDisplay();
+      
+      if(gameState.currentPlayer !== 0) {
+        // AI turn
+        setTimeout(() => aiMove(), 1000);
+      }
+    }
+
+    function aiMove() {
+      gameState.diceValue = Math.floor(Math.random() * 6) + 1;
+      document.getElementById('lastDiceValue').innerText = gameState.diceValue;
+      
+      let player = gameState.players[gameState.currentPlayer];
+      let moves = [];
+      
+      player.tokens.forEach((pos, idx) => {
+        if(pos + gameState.diceValue <= 56) {
+          moves.push({ tokenIdx: idx, toPos: pos + gameState.diceValue });
+        }
+      });
+      
+      if(moves.length > 0) {
+        let move = moves[Math.floor(Math.random() * moves.length)];
+        moveToken(move.tokenIdx, move.toPos);
+      } else {
+        gameState.diceValue = 0;
+        nextTurn();
+      }
+    }
+
+    function updatePlayerDisplay() {
+      let player = gameState.players[gameState.currentPlayer];
+      document.getElementById('currentPlayer').innerText = player.name + ' (' + player.color + ')';
+    }
+
+    // UI Functions
+    function show(id, el) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.nav').forEach(n => n.classList.remove('active'));
+      if(el) el.classList.add('active');
+    }
+
+    function goHome() {
+      show('home');
+      gameState.gameActive = false;
+    }
+
+    function openWaiting(id) {
+      show('waiting');
+    }
+
+    function selectPlayer(idx, el) {
+      document.querySelectorAll('#playerSelect .player').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+      gameState.players[0].id = idx;
+    }
+
+    function startQuickGame() {
+      show('waiting');
+    }
+
+    function startMatch() {
+      gameState.gameActive = true;
+      gameState.currentPlayer = 0;
+      gameState.diceValue = 0;
+      gameState.players.forEach(p => { p.tokens = [0,0,0,0]; p.completed = false; });
+      
+      show('game');
+      initBoard();
+      updatePlayerDisplay();
+    }
+
+    function leaveMatch() {
+      if(confirm('খেলা ছেড়ে চলে যাবেন?')) {
+        show('home');
+        gameState.gameActive = false;
+      }
+    }
+
+    function openAddMoneyModal() {
+      document.getElementById('addMoneyModal').classList.add('active');
+    }
+
+    function closeAddMoneyModal() {
+      document.getElementById('addMoneyModal').classList.remove('active');
+    }
+
+    function setAmount(amt) {
+      document.getElementById('amountInput').value = amt;
+    }
+
+    function confirmAddMoney() {
+      let amount = parseInt(document.getElementById('amountInput').value);
+      if(isNaN(amount) || amount < 50 || amount > 50000) {
+        alert('50 - 50000 টাকার মধ্যে পরিমাণ প্রবেশ করুন');
+        return;
+      }
+      
+      let method = gameState.paymentMethod === 'bkash' ? 'bKash' : 'Nagad';
+      alert(`${method} এর মাধ্যমে ${amount} টাকা যোগ করুন: ${gameState.paymentMethod === 'bkash' ? '01700000000' : '01900000000'}`);
+      
+      gameState.balance += amount;
+      document.getElementById('balance').innerText = gameState.balance;
+      document.getElementById('walletBalance').innerText = gameState.balance;
+      document.getElementById('amountInput').value = '';
+      
+      closeAddMoneyModal();
+    }
+
+    function selectPayment(method) {
+      gameState.paymentMethod = method;
+      document.querySelectorAll('.payment-buttons .btn').forEach(b => b.classList.remove('active'));
+      event.target.closest('.btn').classList.add('active');
+    }
+
+    // Initialize
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'r' || e.key === 'R') rollDice();
+    });
+
+    console.log('Ludo Game Initialized ✅');
   </script>
 </body>
 </html>
