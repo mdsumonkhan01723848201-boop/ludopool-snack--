@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LudoPool Live Preview</title>
+  <style>
+    :root{--bg:#0B0E1A;--card:#141421;--purple:#6F4DF5;--accent:#FFD44D;--muted:#b9c0d3;color-scheme:dark}
+    html,body{height:100%;margin:0;background:var(--bg);font-family:Inter,system-ui,Arial}
+    .app{max-width:420px;margin:16px auto;padding-bottom:96px;color:#fff}
+    .topbar{display:flex;justify-content:space-between;align-items:center;height:56px}
+    .logo{font-weight:700;font-size:20px}
+    .wallet{background:var(--purple);padding:6px 10px;border-radius:8px}
+
+    .hero{display:flex;gap:12px;background:var(--card);padding:12px;border-radius:12px}
+    .hero .text{flex:1}
+    .hero h3{margin:0 0 6px 0}
+    .btn{background:var(--purple);color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;border:0}
+
+    .section{margin-top:18px}
+    .section .head{display:flex;justify-content:space-between;align-items:center;padding:0 4px}
+    .cards{display:flex;gap:12px;overflow:auto;padding:12px 4px}
+    .match-card{min-width:240px;background:var(--card);padding:12px;border-radius:12px;display:flex;justify-content:space-between;align-items:center}
+    .badge{background:#FF6B6B;padding:6px 8px;border-radius:12px;font-size:12px}
+
+    .grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+    .tile{width:calc(50% - 6px);background:var(--card);padding:8px;border-radius:12px}
+    .tile img{width:100%;height:80px;border-radius:8px;object-fit:cover}
+    .play-pill{background:var(--purple);padding:6px 10px;border-radius:12px;color:#fff;display:inline-block;margin-top:8px;cursor:pointer}
+
+    .bottom{position:fixed;left:0;right:0;bottom:0;height:72px;background:var(--bg);border-top:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:space-around}
+    .nav{text-align:center;color:#b9c0d3}
+    .nav.active{color:var(--accent);font-weight:700}
+
+    /* screens */
+    .screen{display:none}
+    .screen.active{display:block}
+
+    /* waiting / game */
+    .players{display:flex;gap:12px;justify-content:space-around;margin-top:12px}
+    .player{width:80px;background:rgba(255,255,255,0.03);padding:10px;border-radius:12px;text-align:center}
+    .start{background:var(--accent);color:#081018;padding:12px;border-radius:12px;border:0;margin-top:12px;cursor:pointer;width:100%}
+
+    .board{height:calc(100vh - 320px);background:rgba(255,255,255,0.02);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-top:12px}
+    .dice{margin-top:12px;display:flex;align-items:center;gap:12px}
+    .dice button{background:var(--purple);color:#fff;padding:12px;border-radius:12px;border:0;cursor:pointer}
+
+    .center-wrap{max-width:420px;margin:16px auto}
+
+    /* small screens fix */
+    @media (max-width:420px){.app{margin:8px}}
+  </style>
+</head>
+<body>
+  <div class="app" id="app">
+    <!-- HOME SCREEN -->
+    <div id="home" class="screen active">
+      <div class="topbar">
+        <div class="logo">LudoPool</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="btn" onclick="openWallet()">৳ 120</button>
+        </div>
+      </div>
+
+      <div class="hero">
+        <div class="text">
+          <h3>কিভাবে টাকা অ্যাড মানি করবেন?</h3>
+          <div style="color:var(--muted)">রেফার করে বন্ধুদের আনার মাধ্যমে বোনাস পান</div>
+          <div style="margin-top:8px"><button class="btn" onclick="share()">শেয়ার করুন</button></div>
+        </div>
+        <div style="width:100px;height:100px;border-radius:8px;background:linear-gradient(135deg,var(--purple),#9b7bff)"></div>
+      </div>
+
+      <div class="section">
+        <div class="head"><div style="font-weight:700">লাইভ ম্যাচ</div><div style="color:var(--muted)">16 Live</div></div>
+        <div class="cards" id="live-cards">
+          <div class="match-card"><div><div style="font-weight:700">Ludo Matches</div><div style="color:var(--muted)">16 Matches Found</div></div><div><div class="badge">Live</div><div style="height:8px"></div><button class="play-pill" onclick="openWaiting('match_123')">Play</button></div></div>
+          <div class="match-card"><div><div style="font-weight:700">Auto Ludo King</div><div style="color:var(--muted)">Auto Matches</div></div><div><div class="badge">Auto</div><div style="height:8px"></div><button class="play-pill" onclick="openWaiting('match_456')">Play</button></div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="head"><div style="font-weight:700">সকল গেমস</div><div style="color:var(--muted)">4 Games</div></div>
+        <div class="grid">
+          <div class="tile"><img src="https://images.unsplash.com/photo-1598136494886-6e56f6c5f3d9?auto=format&fit=crop&w=400&q=60"/><div style="font-weight:700;margin-top:8px">Ludo Classic</div><div style="margin-top:6px"><span class="play-pill" onclick="openWaiting('ludo_tile')">Play</span></div></div>
+          <div class="tile"><img src="https://images.unsplash.com/photo-1544015568-32f5f1a5a7d6?auto=format&fit=crop&w=400&q=60"/><div style="font-weight:700;margin-top:8px">Carrom</div><div style="margin-top:6px"><span class="play-pill" onclick="openWaiting('carrom_tile')">Play</span></div></div>
+          <div class="tile"><img src="https://images.unsplash.com/photo-1564866657318-3bb5db6b6f9c?auto=format&fit=crop&w=400&q=60"/><div style="font-weight:700;margin-top:8px">16 Ghuti</div><div style="margin-top:6px"><span class="play-pill" onclick="openWaiting('ghuti_tile')">Play</span></div></div>
+          <div class="tile"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=60"/><div style="font-weight:700;margin-top:8px">Snake</div><div style="margin-top:6px"><span class="play-pill" onclick="openWaiting('snake_tile')">Play</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WAITING SCREEN -->
+    <div id="waiting" class="screen">
+      <div class="topbar"><div style="cursor:pointer" onclick="goHome()">◀ Back</div><div style="font-weight:700">Waiting Room</div><div style="width:48px"></div></div>
+      <div class="players">
+        <div class="player"><div style="width:48px;height:48px;border-radius:24px;background:var(--purple);line-height:48px;text-align:center;font-weight:700">Y</div><div style="margin-top:8px">You</div><div style="color:var(--muted);margin-top:6px">Ready</div></div>
+        <div class="player"><div style="width:48px;height:48px;border-radius:24px;background:#ffb86b;line-height:48px;text-align:center;font-weight:700">A</div><div style="margin-top:8px">Ali</div><div style="color:var(--muted);margin-top:6px">Ready</div></div>
+        <div class="player"><div style="width:48px;height:48px;border-radius:24px;background:#6fe39b;line-height:48px;text-align:center;font-weight:700">R</div><div style="margin-top:8px">Rana</div><div style="color:var(--muted);margin-top:6px">Ready</div></div>
+        <div class="player"><div style="width:48px;height:48px;border-radius:24px;background:#9b7bff;line-height:48px;text-align:center;font-weight:700">M</div><div style="margin-top:8px">Mitu</div><div style="color:var(--muted);margin-top:6px">Ready</div></div>
+      </div>
+      <div style="padding:16px"><button class="start" onclick="startMatch()">Start Match</button></div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div id="game" class="screen">
+      <div class="topbar"><div style="cursor:pointer" onclick="leaveMatch()">Leave</div><div style="font-weight:700">Match • 4 Players</div><div style="width:48px"></div></div>
+      <div class="board">Ludo Board Preview</div>
+      <div class="dice" style="justify-content:center">
+        <div style="color:var(--muted);text-align:center">Dice: <span id="diceValue">1</span></div>
+        <button onclick="rollDice()">Roll Dice</button>
+      </div>
+      <div style="padding:12px;color:var(--muted)">
+        <div style="font-weight:700;margin-bottom:8px">Allowed Moves / Hints</div>
+        <div>• Move token A to 7</div>
+        <div>• Attack opponent at B</div>
+      </div>
+    </div>
+
+    <!-- WALLET SCREEN -->
+    <div id="wallet" class="screen">
+      <div style="padding:16px;background:var(--card);border-radius:12px">
+        <div style="color:var(--muted)">Your Balance</div>
+        <div style="font-size:28px;font-weight:700;margin-top:6px">৳ <span id="bal">120</span></div>
+        <div style="margin-top:10px;display:flex;gap:8px"><button class="btn" onclick="topUp()">Top-up</button><button class="btn" onclick="withdraw()">Withdraw</button></div>
+      </div>
+      <div style="margin-top:16px;color:var(--muted)">
+        <div style="font-weight:700;margin-bottom:8px">Transactions</div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0"><div>Top-up</div><div>৳ 200</div></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0"><div>Win</div><div style="color:#2ED573">৳ 500</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bottom">
+    <div class="nav active" onclick="show('home', this)">Play</div>
+    <div style="text-align:center"><div style="background:#fff;padding:10px 18px;border-radius:24px;cursor:pointer;color:var(--purple);font-weight:700" onclick="openWaiting('quick')">Play</div></div>
+    <div class="nav" onclick="show('wallet', this)">Me</div>
+  </div>
+
+  <script>
+    function show(id, el){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active')); if(el) el.classList.add('active'); }
+    function openWaiting(id){ show('waiting'); }
+    function goHome(){ show('home'); }
+    function startMatch(){ show('game'); }
+    function leaveMatch(){ show('home'); }
+    function openWallet(){ show('wallet', document.querySelectorAll('.nav')[2]); }
+    function share(){ alert('Share referral code!'); }
+    function topUp(){ alert('Top-up flow (stub)'); }
+    function withdraw(){ alert('Withdraw flow (stub)'); }
+    function rollDice(){ const r = Math.floor(Math.random()*6)+1; document.getElementById('diceValue').innerText = r; }
+  </script>
+</body>
+</html>
