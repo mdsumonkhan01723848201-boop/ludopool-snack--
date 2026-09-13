@@ -1,538 +1,308 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="bn">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LUDO POOL</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LUDO POOL - Add Money</title>
   <style>
-    :root{
-      --bg:#0e1222;
-      --card:#1a1f35;
-      --yellow:#ffcc00;
-      --purple:#9b7bff;
-      --green:#10b981;
-      --blue:#3b82f6;
-      --pink:#ec4899;
-      --muted:#8892b0;
-      color-scheme:dark
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif
     }
     
-    *{margin:0;padding:0;box-sizing:border-box}
-    html,body{height:100%;background:var(--bg);font-family:Arial,sans-serif;color:#fff}
-    
-    .app{max-width:420px;margin:0 auto;padding-bottom:20px;background:var(--bg);min-height:100vh}
-    
-    /* TOP BAR */
-    .topbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      height:56px;
-      padding:0 12px;
-      background:var(--bg);
-      border-bottom:1px solid rgba(255,255,255,0.05)
+    body {
+      background: #0e1222;
+      max-width: 420px;
+      margin: 0 auto;
+      color: #000
     }
     
-    .logo{
-      font-weight:700;
-      font-size:18px;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      cursor:pointer
+    .top {
+      background: #14122a;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100
     }
     
-    .back-arrow{
-      font-size:20px;
-      cursor:pointer;
-      display:none
+    .back {
+      width: 38px;
+      height: 38px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 22px;
+      cursor: pointer
     }
     
-    .wallet-badge{
-      background:var(--yellow);
-      color:#000;
-      padding:6px 12px;
-      border-radius:6px;
-      cursor:pointer;
-      font-weight:700;
-      font-size:13px
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      margin: 12px;
+      padding: 16px
     }
     
-    /* HOME SCREEN */
-    .screen{display:none}
-    .screen.active{display:block}
-    
-    #home{padding:16px}
-    #wallet{padding:16px}
-    
-    /* GAMES SECTION */
-    .games-container{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-bottom:16px
+    .num {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee
     }
     
-    .game-card{
-      background:var(--card);
-      border-radius:12px;
-      padding:12px;
-      text-align:center;
-      border:1px solid rgba(255,255,255,0.1)
+    .num:last-child {
+      border-bottom: none
     }
     
-    .game-emoji{
-      font-size:48px;
-      margin-bottom:8px
+    .num b {
+      font-size: 18px;
+      font-weight: 900
     }
     
-    .game-name{
-      font-weight:700;
-      font-size:14px;
-      margin-bottom:8px
+    .copy {
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-size: 20px
     }
     
-    .play-btn{
-      background:var(--yellow);
-      color:#000;
-      padding:8px 12px;
-      border-radius:6px;
-      border:0;
-      cursor:pointer;
-      font-weight:700;
-      font-size:12px;
-      width:100%
+    .purple {
+      color: #7c0080;
+      font-size: 13px;
+      font-weight: 700
     }
     
-    /* WALLET PAGE */
-    .wallet-card{
-      background:#fff;
-      color:#000;
-      border-radius:16px;
-      padding:16px;
-      margin-bottom:12px
+    .methods {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin: 14px 0
     }
     
-    .wallet-row{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:12px 0;
-      border-bottom:1px solid #f0f0f0
+    .method {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      background: #fff
     }
     
-    .wallet-row:last-child{
-      border-bottom:none
+    .method b {
+      display: block;
+      font-weight: 700;
+      font-size: 13px;
+      margin-top: 6px
     }
     
-    .wallet-label{
-      font-size:12px;
-      font-weight:700;
-      color:#666
+    .input {
+      width: 100%;
+      border: 2px solid #000;
+      border-radius: 10px;
+      padding: 12px;
+      margin: 8px 0;
+      text-align: center;
+      font-size: 15px
     }
     
-    .wallet-amount{
-      font-size:16px;
-      font-weight:700;
-      color:#000
+    .verify {
+      width: 100%;
+      background: #000;
+      color: #fff;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 800;
+      margin-top: 14px;
+      border: 0;
+      cursor: pointer
     }
     
-    .wallet-link{
-      color:#3b82f6;
-      font-size:12px;
-      cursor:pointer;
-      text-decoration:underline
+    .note {
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+      margin-top: 12px;
+      line-height: 18px
     }
     
-    .btn-small{
-      padding:6px 12px;
-      border-radius:6px;
-      border:0;
-      cursor:pointer;
-      font-weight:700;
-      font-size:11px;
-      white-space:nowrap
+    .hide {
+      display: none
     }
     
-    .btn-green{background:var(--green);color:#fff}
-    .btn-blue{background:var(--blue);color:#fff}
-    .btn-purple{background:var(--purple);color:#fff}
-    .btn-pink{background:var(--pink);color:#fff}
-    
-    .wallet-section-title{
-      color:#666;
-      font-size:12px;
-      font-weight:700;
-      margin-top:16px;
-      margin-bottom:8px
+    #home {
+      padding: 12px
     }
     
-    .help-box{
-      background:#fff;
-      color:#000;
-      border-radius:12px;
-      padding:12px;
-      margin-bottom:12px
+    #wallet {
+      padding: 0
     }
     
-    .help-title{
-      font-weight:700;
-      font-size:13px;
-      margin-bottom:4px
+    .wallet-btn {
+      background: #ffcc00;
+      color: #000;
+      padding: 12px 24px;
+      border-radius: 24px;
+      display: inline-block;
+      font-weight: 900;
+      cursor: pointer;
+      margin-top: 40px;
+      font-size: 16px
     }
     
-    .help-subtitle{
-      font-size:12px;
-      color:#666;
-      margin-bottom:8px
-    }
-    
-    .help-btn{
-      width:100%;
-      padding:8px 12px;
-      background:var(--pink);
-      color:#fff;
-      border:0;
-      border-radius:6px;
-      cursor:pointer;
-      font-weight:700;
-      font-size:12px
-    }
-    
-    .contact-box{
-      background:#fff;
-      color:#000;
-      border-radius:12px;
-      padding:12px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center
-    }
-    
-    .contact-text{
-      font-size:12px;
-      font-weight:600
-    }
-    
-    .btn-contact{
-      background:var(--blue);
-      color:#fff;
-      padding:8px 12px;
-      border-radius:6px;
-      border:0;
-      cursor:pointer;
-      font-weight:700;
-      font-size:12px
-    }
-    
-    /* MODAL */
-    .modal-overlay{
-      position:fixed;
-      top:0;
-      left:0;
-      right:0;
-      bottom:0;
-      background:rgba(0,0,0,0.7);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:1000
-    }
-    
-    .modal-overlay.active{
-      display:flex
-    }
-    
-    .modal{
-      background:var(--bg);
-      border:1px solid rgba(255,255,255,0.1);
-      border-radius:16px;
-      padding:24px;
-      width:90%;
-      max-width:380px;
-      box-shadow:0 20px 60px rgba(0,0,0,0.8)
-    }
-    
-    .modal-title{
-      font-size:18px;
-      font-weight:700;
-      margin-bottom:16px;
-      text-align:center;
-      color:var(--yellow)
-    }
-    
-    .modal-number{
-      background:#fff;
-      color:#000;
-      font-size:28px;
-      font-weight:700;
-      padding:16px;
-      border-radius:12px;
-      text-align:center;
-      margin-bottom:12px;
-      letter-spacing:2px
-    }
-    
-    .modal-instruction{
-      background:var(--card);
-      color:#fff;
-      padding:12px;
-      border-radius:8px;
-      font-size:13px;
-      margin-bottom:16px;
-      text-align:center;
-      line-height:1.5
-    }
-    
-    .modal-input-group{
-      margin-bottom:12px
-    }
-    
-    .modal-input-label{
-      font-size:12px;
-      font-weight:700;
-      color:var(--muted);
-      margin-bottom:6px;
-      display:block
-    }
-    
-    .modal-input{
-      width:100%;
-      background:var(--card);
-      border:1px solid rgba(255,255,255,0.1);
-      color:#fff;
-      padding:12px;
-      border-radius:8px;
-      font-size:14px
-    }
-    
-    .modal-input::placeholder{
-      color:#666
-    }
-    
-    .modal-submit{
-      width:100%;
-      background:var(--yellow);
-      color:#000;
-      padding:12px;
-      border-radius:8px;
-      border:0;
-      cursor:pointer;
-      font-weight:700;
-      font-size:14px;
-      margin-bottom:8px
-    }
-    
-    .modal-close{
-      width:100%;
-      background:var(--card);
-      color:#fff;
-      padding:12px;
-      border-radius:8px;
-      border:1px solid rgba(255,255,255,0.1);
-      cursor:pointer;
-      font-weight:700;
-      font-size:14px
-    }
-    
-    @media (max-width:420px){
-      .app{margin:0}
-      .modal{width:95%}
+    .home-text {
+      color: #fff;
+      text-align: center;
+      margin-top: 40px
     }
   </style>
 </head>
 <body>
-  <div class="app" id="app">
-    <!-- HOME SCREEN -->
-    <div id="home" class="screen active">
-      <div class="topbar">
-        <div class="logo">🎲 LUDO POOL</div>
-        <button class="wallet-badge" onclick="openWallet()">💰 ৳ 1,250</button>
-      </div>
-      
-      <div style="margin-top:20px;font-size:16px;font-weight:700;margin-bottom:12px">উপলব্ধ গেমস</div>
-      
-      <div class="games-container">
-        <div class="game-card">
-          <div class="game-emoji">🎲</div>
-          <div class="game-name">Ludo Classic</div>
-          <button class="play-btn" onclick="openWallet()">খেলুন</button>
-        </div>
-        
-        <div class="game-card">
-          <div class="game-emoji">🎯</div>
-          <div class="game-name">Carrom</div>
-          <button class="play-btn" onclick="openWallet()">খেলুন</button>
-        </div>
-      </div>
-    </div>
-    
-    <!-- WALLET SCREEN -->
-    <div id="wallet" class="screen">
-      <div class="topbar">
-        <div class="logo" style="cursor:pointer" onclick="closeWallet()">
-          <span class="back-arrow">◀</span> LUDO POOL
-        </div>
-        <button class="wallet-badge" onclick="closeWallet()">💰 ৳ 1,250</button>
-      </div>
-      
-      <!-- AVAILABLE BALANCE -->
-      <div class="wallet-card">
-        <div class="wallet-row">
-          <div>
-            <div class="wallet-label">AVAILABLE BALANCE</div>
-            <div class="wallet-amount">৳ 0</div>
-          </div>
-          <div class="wallet-link" onclick="viewTransactions()">View Transactions ></div>
-        </div>
-      </div>
-      
-      <!-- WINNING CASH BALANCE -->
-      <div class="wallet-card">
-        <div class="wallet-row">
-          <div>
-            <div class="wallet-label">WINNING CASH BALANCE</div>
-            <div class="wallet-amount">৳ 0.00</div>
-          </div>
-          <button class="btn-small btn-green" onclick="withdraw()">WITHDRAW</button>
-        </div>
-      </div>
-      
-      <!-- DEPOSIT CASH BALANCE -->
-      <div class="wallet-card">
-        <div class="wallet-row">
-          <div>
-            <div class="wallet-label">DEPOSIT CASH BALANCE</div>
-            <div class="wallet-amount">৳ 0.00</div>
-          </div>
-          <button class="btn-small btn-blue" onclick="openAddMoneyModal()">ADD MONEY</button>
-        </div>
-      </div>
-      
-      <!-- TRANSFER -->
-      <div class="wallet-card">
-        <div class="wallet-row">
-          <div>
-            <div class="wallet-label">WINNING TO GAMING BALANCE</div>
-          </div>
-          <button class="btn-small btn-purple" onclick="transfer()">TRANSFER</button>
-        </div>
-      </div>
-      
-      <!-- HOW TO ADD MONEY -->
-      <div class="wallet-section-title">কিভাবে টাকা এড করবেন?</div>
-      <div class="help-box">
-        <div class="help-title">HOW TO ADD MONEY?</div>
-        <div class="help-subtitle">কিভাবে টাকা এড করবে</div>
-        <button class="help-btn" onclick="watchVideo()">ভিডিও দেখুন</button>
-      </div>
-      
-      <!-- HOW TO JOIN MATCH -->
-      <div class="wallet-section-title">কিভাবে ম্যাচ এ জইন করবেন?</div>
-      <div class="help-box">
-        <div class="help-title">HOW TO JOIN A MATCH?</div>
-        <div class="help-subtitle">কিভাবে ম্যাচ এ জইন করবেন?</div>
-        <button class="help-btn" onclick="watchVideo()">ভিডিও দেখুন</button>
-      </div>
-      
-      <!-- CONTACT US -->
-      <div class="contact-box">
-        <div class="contact-text">টাকা এড না হলে এখানে মেসেজ দিন</div>
-        <button class="btn-contact" onclick="contactUs()">CONTACT US</button>
-      </div>
-    </div>
-  </div>
-  
-  <!-- ADD MONEY MODAL -->
-  <div class="modal-overlay" id="addMoneyModal">
-    <div class="modal">
-      <div class="modal-title">টাকা যোগ করুন</div>
-      
-      <div class="modal-number">01779328777</div>
-      
-      <div class="modal-instruction">
-        01779328777 এই নাম্বারে Send Money করুন - bKash, Nagad, Rocket সব আছে
-      </div>
-      
-      <div class="modal-input-group">
-        <label class="modal-input-label">পরিমাণ (Amount)</label>
-        <input type="number" id="amountInput" class="modal-input" placeholder="উদা: 500" min="1">
-      </div>
-      
-      <div class="modal-input-group">
-        <label class="modal-input-label">ট্রানজেকশন ID (Transaction ID)</label>
-        <input type="text" id="transactionInput" class="modal-input" placeholder="উদা: TXN123456789">
-      </div>
-      
-      <button class="modal-submit" onclick="submitPayment()">জমা দিন</button>
-      <button class="modal-close" onclick="closeAddMoneyModal()">বাতিল</button>
-    </div>
-  </div>
 
-  <script>
-    function openWallet() {
-      document.getElementById('home').classList.remove('active');
-      document.getElementById('wallet').classList.add('active');
-      document.querySelector('.back-arrow').style.display = 'inline';
+<div class="top">
+  <div class="back" onclick="go('home')">❮</div>
+  <b style="font-size:18px">Add Money</b>
+</div>
+
+<!-- HOME -->
+<div id="home">
+  <div class="home-text">
+    <div class="wallet-btn" onclick="go('wallet')">৳ 1,250 - ওয়ালেট দেখুন</div>
+    <br><br>
+    <span style="font-size:14px">এখানে ক্লিক করলে ওয়ালেট আসবে</span>
+  </div>
+</div>
+
+<!-- WALLET -->
+<div id="wallet" class="hide">
+  <div class="card">
+    <div style="padding:10px 0;border-bottom:1px solid #eee">
+      <b style="font-size:11px">AVAILABLE BALANCE :</b>
+      <span style="float:right;font-size:11px;color:#2563eb;cursor:pointer" onclick="alert('Transaction history coming soon')">View Transactions ❯</span>
+      <div style="font-size:24px;font-weight:900;margin-top:6px">৳ 0</div>
+    </div>
+    
+    <div style="padding:10px 0;border-bottom:1px solid #eee">
+      <b style="font-size:11px">💲 DEPOSIT CASH BALANCE :</b>
+      <button onclick="go('add')" style="float:right;background:#2563eb;color:#fff;border:0;padding:8px 12px;border-radius:6px;font-weight:700;cursor:pointer">➕ ADD MONEY</button>
+      <div style="font-size:22px;font-weight:900;margin-top:6px">৳ 0.00</div>
+    </div>
+    
+    <div style="text-align:center;padding:14px">
+      <button onclick="go('add')" style="background:#2563eb;color:#fff;border:0;padding:12px 28px;border-radius:8px;font-weight:800;cursor:pointer;font-size:14px">ADD MONEY পেজে যান</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD MONEY PAGE -->
+<div id="add" class="hide">
+  <div class="card">
+    <!-- NUMBERS SECTION -->
+    <div class="num">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="color:#e91e63">📤</span>
+        <b>01779328777</b>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="copy" onclick="copy('01779328777')">📋</span>
+        <span class="purple">( সেন্টমানি করুন )</span>
+      </div>
+    </div>
+    
+    <div class="num">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="color:#f37021">📤</span>
+        <b>01779328777</b>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="copy" onclick="copy('01779328777')">📋</span>
+        <span style="color:#666;font-size:13px">(সেন্টমানি করুন)</span>
+      </div>
+    </div>
+    
+    <div class="num">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="color:#8a2be2">📤</span>
+        <b>01779328777</b>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="copy" onclick="copy('01779328777')">📋</span>
+        <span style="color:#666;font-size:13px">(সেন্টমানি করুন)</span>
+      </div>
+    </div>
+    
+    <!-- PAYMENT METHODS -->
+    <div class="methods">
+      <div class="method">
+        <div style="font-size:32px;color:#e91e63">◣</div>
+        <b style="color:#e91e63">bKash</b>
+      </div>
+      <div class="method">
+        <div style="font-size:32px;color:#f37021">নগ</div>
+        <b style="color:#f37021">Nagad</b>
+      </div>
+      <div class="method">
+        <div style="font-size:28px;color:#8a2be2">🚀</div>
+        <b style="color:#8a2be2">Rocket</b>
+      </div>
+    </div>
+    
+    <!-- FORM INPUTS -->
+    <input class="input" id="from" placeholder="যেই নাম্বার থেকে টাকা পাঠিয়েছেন">
+    <input class="input" id="amt" type="number" placeholder="কত টাকা পাঠিয়েছেন">
+    <input class="input" id="trxid" placeholder="TRXID (ঐচ্ছিক)">
+    
+    <!-- VERIFY BUTTON -->
+    <button class="verify" onclick="verify()">VERIFY</button>
+    
+    <!-- NOTE -->
+    <div class="note">
+      Verify করার আগে Send Money করতে হবে, নাহলে<br>আপনার Verification সফল হবে না
+    </div>
+  </div>
+</div>
+
+<script>
+  function go(id) {
+    document.getElementById('home').classList.add('hide');
+    document.getElementById('wallet').classList.add('hide');
+    document.getElementById('add').classList.add('hide');
+    document.getElementById(id).classList.remove('hide');
+  }
+  
+  function copy(t) {
+    navigator.clipboard.writeText(t);
+    alert(t + " কপি হয়েছে");
+  }
+  
+  function verify() {
+    let f = document.getElementById('from').value;
+    let a = document.getElementById('amt').value;
+    
+    if (!f || !a) {
+      alert("নাম্বার ও টাকা লিখুন");
+      return;
     }
     
-    function closeWallet() {
-      document.getElementById('wallet').classList.remove('active');
-      document.getElementById('home').classList.add('active');
-      document.querySelector('.back-arrow').style.display = 'none';
-    }
+    alert("আপনার " + a + " টাকা Verify এর জন্য পাঠানো হয়েছে!\n01779328777 নাম্বারে চেক করা হবে।");
     
-    function openAddMoneyModal() {
-      document.getElementById('addMoneyModal').classList.add('active');
-      document.getElementById('amountInput').value = '';
-      document.getElementById('transactionInput').value = '';
-    }
-    
-    function closeAddMoneyModal() {
-      document.getElementById('addMoneyModal').classList.remove('active');
-    }
-    
-    function submitPayment() {
-      const amount = document.getElementById('amountInput').value;
-      const transactionId = document.getElementById('transactionInput').value;
-      
-      if(!amount || !transactionId) {
-        alert('অনুগ্রহ করে সব তথ্য পূরণ করুন');
-        return;
-      }
-      
-      alert(`পেমেন্ট সফল হয়েছে!\nপরিমাণ: ৳${amount}\nট্রানজেকশন ID: ${transactionId}\n\nআপনার অ্যাকাউন্টে কিছুক্ষণের মধ্যে টাকা যুক্ত হবে`);
-      closeAddMoneyModal();
-    }
-    
-    function withdraw() {
-      alert('Withdraw অপশন শীঘ্রই আসছে');
-    }
-    
-    function transfer() {
-      alert('Transfer শীঘ্রই উপলব্ধ হবে');
-    }
-    
-    function viewTransactions() {
-      alert('আপনার সকল লেনদেন এখানে দেখা যাবে');
-    }
-    
-    function watchVideo() {
-      alert('ভিডিও চালু হচ্ছে...');
-    }
-    
-    function contactUs() {
-      alert('আমাদের সাথে যোগাযোগ করুন');
-    }
-    
-    // Close modal on overlay click
-    document.getElementById('addMoneyModal').addEventListener('click', function(e) {
-      if(e.target === this) {
-        closeAddMoneyModal();
-      }
-    });
-    
-    console.log('LUDO POOL Wallet System Loaded ✅');
-  </script>
+    // Clear form
+    document.getElementById('from').value = '';
+    document.getElementById('amt').value = '';
+    document.getElementById('trxid').value = '';
+  }
+  
+  // Load add money page by default
+  go('add');
+</script>
+
 </body>
 </html>
