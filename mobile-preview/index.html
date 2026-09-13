@@ -3,297 +3,415 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LUDO POOL - Add Money</title>
+  <title>LUDO POOL</title>
   <style>
     * {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif
+      box-sizing: border-box
     }
     
     body {
-      background: #0e1222;
+      margin: 0;
+      background: #070d20;
       max-width: 420px;
       margin: 0 auto;
-      color: #000
+      font-family: Arial, sans-serif;
+      color: #fff
     }
     
-    .top {
-      background: #14122a;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .container {
+      background: #070d20;
       padding: 12px;
-      position: sticky;
-      top: 0;
-      z-index: 100
+      min-height: 100vh
     }
     
-    .back {
+    /* TOP BAR */
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px
+    }
+    
+    .logo {
+      display: flex;
+      gap: 8px;
+      align-items: center
+    }
+    
+    .logo-icon {
+      font-size: 36px
+    }
+    
+    .logo-text {
+      color: #ff2f7b;
+      font-weight: 900;
+      font-size: 22px;
+      line-height: 20px
+    }
+    
+    .top-right {
+      display: flex;
+      gap: 8px;
+      align-items: center
+    }
+    
+    .whatsapp {
+      background: #25d366;
       width: 38px;
       height: 38px;
-      background: #fff;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #000;
-      font-size: 22px;
+      font-size: 20px;
       cursor: pointer
     }
     
-    .card {
-      background: #fff;
-      border-radius: 18px;
-      margin: 12px;
-      padding: 16px
-    }
-    
-    .num {
+    .wallet-btn {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid #eee
+      gap: 4px;
+      background: #121a33;
+      border-radius: 20px;
+      padding: 6px 12px;
+      border: 1px solid #223;
+      cursor: pointer;
+      transition: all 0.2s
     }
     
-    .num:last-child {
-      border-bottom: none
+    .wallet-btn:hover {
+      border-color: #334
     }
     
-    .num b {
-      font-size: 18px;
+    .wallet-icon {
+      font-size: 18px
+    }
+    
+    .wallet-amount {
+      color: #ffeb00;
       font-weight: 900
     }
     
-    .copy {
-      width: 28px;
-      height: 28px;
-      cursor: pointer;
-      font-size: 20px
-    }
-    
-    .purple {
-      color: #7c0080;
-      font-size: 13px;
-      font-weight: 700
-    }
-    
-    .methods {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
-      margin: 14px 0
-    }
-    
-    .method {
-      border: 2px solid #ddd;
-      border-radius: 12px;
-      padding: 12px;
-      text-align: center;
-      background: #fff;
-      cursor: pointer;
-      position: relative;
-      transition: all 0.2s
-    }
-    
-    .method:hover {
-      border-color: #999
-    }
-    
-    .method b {
-      display: block;
-      font-weight: 700;
-      font-size: 13px;
-      margin-top: 6px
-    }
-    
-    .method-icon {
-      font-size: 24px;
-      margin-bottom: 4px
-    }
-    
-    .method-tick {
-      font-size: 12px;
-      color: #10b981;
-      font-weight: 700;
-      margin-top: 6px;
-      min-height: 16px
-    }
-    
-    .input {
-      width: 100%;
-      border: 2px solid #000;
-      border-radius: 10px;
-      padding: 12px;
-      margin: 8px 0;
-      text-align: center;
-      font-size: 15px
-    }
-    
-    .verify {
-      width: 100%;
-      background: #000;
-      color: #fff;
+    /* BONUS BANNER */
+    .bonus-banner {
+      background: linear-gradient(180deg, #2a5cff, #1a3ccc);
+      border-radius: 16px;
       padding: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #4a6fff
+    }
+    
+    .bonus-left {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex: 1
+    }
+    
+    .bonus-icon {
+      background: #ffeb00;
+      width: 54px;
+      height: 54px;
       border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      flex-shrink: 0
+    }
+    
+    .bonus-text h3 {
+      color: #ffeb00;
+      font-weight: 900;
       font-size: 18px;
-      font-weight: 800;
-      margin-top: 14px;
+      margin-bottom: 4px;
+      line-height: 1.2
+    }
+    
+    .bonus-text p {
+      font-size: 11px;
+      color: #ccc
+    }
+    
+    .bonus-btn {
+      background: #ffeb00;
       border: 0;
+      padding: 10px 18px;
+      border-radius: 22px;
+      font-weight: 900;
       cursor: pointer;
+      white-space: nowrap;
       transition: all 0.2s
     }
     
-    .verify:hover {
-      background: #333
+    .bonus-btn:hover {
+      background: #ffd600
     }
     
-    .note {
-      font-size: 12px;
-      color: #777;
-      text-align: center;
-      margin-top: 12px;
-      line-height: 18px
+    /* REFER CARD */
+    .refer-card {
+      background: #11172f;
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #1f2a4a
     }
     
-    .hide {
+    .refer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+    
+    .refer-left {
+      display: flex;
+      gap: 10px
+    }
+    
+    .refer-icon {
+      font-size: 34px
+    }
+    
+    .refer-text b {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 2px;
+      line-height: 1.3
+    }
+    
+    .refer-text p {
+      font-size: 10px;
+      color: #aaa;
+      margin-top: 2px
+    }
+    
+    .refer-btn {
+      background: #ffeb00;
+      border: 0;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 800;
+      height: 32px;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #000
+    }
+    
+    .refer-btn:hover {
+      background: #ffd600
+    }
+    
+    /* NOTICE SECTION */
+    .notice-box {
+      background: #151d36;
+      border-radius: 10px;
+      padding: 8px;
+      display: flex;
+      gap: 8px;
+      border: 1px solid #26325a;
+      margin-top: 10px
+    }
+    
+    .notice-icon {
+      font-size: 20px;
+      flex-shrink: 0
+    }
+    
+    .notice-text {
+      font-size: 11px;
+      line-height: 1.4
+    }
+    
+    .notice-text b {
+      display: block;
+      margin-bottom: 2px
+    }
+    
+    .notice-highlight {
+      color: #ffeb00;
+      font-weight: 900
+    }
+    
+    /* SCREENS */
+    .screen {
       display: none
     }
     
-    #home {
-      padding: 12px
-    }
-    
-    #wallet {
-      padding: 0
-    }
-    
-    .wallet-btn {
-      background: #ffcc00;
-      color: #000;
-      padding: 12px 24px;
-      border-radius: 24px;
-      display: inline-block;
-      font-weight: 900;
-      cursor: pointer;
-      margin-top: 40px;
-      font-size: 16px
-    }
-    
-    .home-text {
-      color: #fff;
-      text-align: center;
-      margin-top: 40px
+    .screen.active {
+      display: block
     }
   </style>
 </head>
 <body>
 
-<div class="top">
-  <div class="back" onclick="go('home')">❮</div>
-  <b style="font-size:18px">Add Money</b>
-</div>
-
-<!-- HOME -->
-<div id="home">
-  <div class="home-text">
-    <div class="wallet-btn" onclick="go('wallet')">৳ 1,250 - ওয়ালেট দেখুন</div>
-    <br><br>
-    <span style="font-size:14px">এখানে ক্লিক করলে ওয়ালেট আসবে</span>
+<div class="container">
+  <!-- HOME SCREEN -->
+  <div id="home" class="screen active">
+    <!-- TOP -->
+    <div class="top">
+      <div class="logo">
+        <div class="logo-icon">🎲</div>
+        <div class="logo-text">LUDO<br>POOL</div>
+      </div>
+      <div class="top-right">
+        <div class="whatsapp" onclick="alert('WhatsApp গ্রুপে যোগ দিন')">🟢</div>
+        <div class="wallet-btn" onclick="openWallet()">
+          <span class="wallet-icon">💰</span>
+          <span class="wallet-amount">৳ 1,250</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- BLUE BONUS BANNER -->
+    <div class="bonus-banner">
+      <div class="bonus-left">
+        <div class="bonus-icon">🎁</div>
+        <div class="bonus-text">
+          <h3>১০০% বোনাস এখনই!<br>রেজিস্টার করলেই পাবেন</h3>
+          <p>প্রথম রিচার্জে পাবেন ১০০% বোনাস</p>
+        </div>
+      </div>
+      <button class="bonus-btn" onclick="alert('বোনাস ক্লেইম প্রক্রিয়া শীঘ্রই আসছে')">ক্লেইম</button>
+    </div>
+    
+    <!-- REFER + NOTICE -->
+    <div class="refer-card">
+      <!-- REFER SECTION -->
+      <div class="refer-top">
+        <div class="refer-left">
+          <div class="refer-icon">🎁</div>
+          <div class="refer-text">
+            <b>রেফার করু ও পান<br>৳200</b>
+            <p>আপনার বন্ধু রেজিস্টার করলে<br>পাবেন ৳200 ক্যাশ</p>
+          </div>
+        </div>
+        <button class="refer-btn" onclick="alert('রেফারেল লিঙ্ক কপি হয়েছে: https://ludopool.com/?ref=YOU')">ইনভাইট ></button>
+      </div>
+      
+      <!-- NOTICE BOX -->
+      <div class="notice-box">
+        <div class="notice-icon">🔔</div>
+        <div class="notice-text">
+          <b>নোটিশ</b>
+          ⚠️ নতুন লুডো টুর্নামেন্ট শুরু হয়েছে! এখনই যোগ দিন ও জিতে নিন
+          <span class="notice-highlight">৳5000</span>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-
-<!-- WALLET -->
-<div id="wallet" class="hide">
-  <div class="card">
-    <div style="padding:10px 0;border-bottom:1px solid #eee">
-      <b style="font-size:11px">AVAILABLE BALANCE :</b>
-      <span style="float:right;font-size:11px;color:#2563eb;cursor:pointer" onclick="alert('Transaction history coming soon')">View Transactions ❯</span>
-      <div style="font-size:24px;font-weight:900;margin-top:6px">৳ 0</div>
+  
+  <!-- WALLET SCREEN -->
+  <div id="wallet" class="screen">
+    <div class="top">
+      <div class="logo" onclick="closeWallet()" style="cursor: pointer">
+        <span style="font-size: 20px">❮</span>
+        <div class="logo-text">LUDO<br>POOL</div>
+      </div>
+      <div class="wallet-btn" onclick="closeWallet()">
+        <span class="wallet-icon">💰</span>
+        <span class="wallet-amount">৳ 1,250</span>
+      </div>
     </div>
     
-    <div style="padding:10px 0;border-bottom:1px solid #eee">
-      <b style="font-size:11px">💲 DEPOSIT CASH BALANCE :</b>
-      <button onclick="go('add')" style="float:right;background:#2563eb;color:#fff;border:0;padding:8px 12px;border-radius:6px;font-weight:700;cursor:pointer">➕ ADD MONEY</button>
-      <div style="font-size:22px;font-weight:900;margin-top:6px">৳ 0.00</div>
-    </div>
-    
-    <div style="text-align:center;padding:14px">
-      <button onclick="go('add')" style="background:#2563eb;color:#fff;border:0;padding:12px 28px;border-radius:8px;font-weight:800;cursor:pointer;font-size:14px">ADD MONEY পেজে যান</button>
+    <div style="background: #fff; border-radius: 18px; margin-top: 12px; padding: 16px; color: #000">
+      <div style="padding: 10px 0; border-bottom: 1px solid #eee">
+        <b style="font-size: 11px">AVAILABLE BALANCE :</b>
+        <span style="float: right; font-size: 11px; color: #2563eb; cursor: pointer" onclick="alert('Transaction history coming soon')">View Transactions ❯</span>
+        <div style="font-size: 24px; font-weight: 900; margin-top: 6px">৳ 0</div>
+      </div>
+      
+      <div style="padding: 10px 0; border-bottom: 1px solid #eee">
+        <b style="font-size: 11px">💲 DEPOSIT CASH BALANCE :</b>
+        <button onclick="goAddMoney()" style="float: right; background: #2563eb; color: #fff; border: 0; padding: 8px 12px; border-radius: 6px; font-weight: 700; cursor: pointer">➕ ADD MONEY</button>
+        <div style="font-size: 22px; font-weight: 900; margin-top: 6px">৳ 0.00</div>
+      </div>
+      
+      <div style="text-align: center; padding: 14px">
+        <button onclick="goAddMoney()" style="background: #2563eb; color: #fff; border: 0; padding: 12px 28px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 14px">ADD MONEY পেজে যান</button>
+      </div>
     </div>
   </div>
-</div>
-
-<!-- ADD MONEY PAGE -->
-<div id="add" class="hide">
-  <div class="card">
-    <!-- NUMBERS SECTION -->
-    <div class="num">
-      <div style="display:flex;align-items:center;gap:8px">
-        <span style="color:#e91e63">📤</span>
-        <b>01779328777</b>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="copy" onclick="copy('01779328777')">📋</span>
-        <span class="purple">( সেন্টমানি করুন )</span>
+  
+  <!-- ADD MONEY SCREEN -->
+  <div id="addMoney" class="screen">
+    <div class="top">
+      <div class="logo" onclick="closeWallet()" style="cursor: pointer">
+        <span style="font-size: 20px">❮</span>
+        <div style="color: #fff; font-weight: 900">Add Money</div>
       </div>
     </div>
     
-    <div class="num">
-      <div style="display:flex;align-items:center;gap:8px">
-        <span style="color:#f37021">📤</span>
-        <b>01779328777</b>
+    <div style="background: #fff; border-radius: 18px; margin-top: 12px; padding: 16px; color: #000">
+      <!-- PAYMENT NUMBERS -->
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee">
+        <div style="display: flex; align-items: center; gap: 8px">
+          <span style="color: #e91e63; font-size: 18px">📤</span>
+          <b style="font-size: 18px; font-weight: 900">01779328777</b>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px">
+          <span onclick="copy('01779328777')" style="font-size: 20px; cursor: pointer">📋</span>
+          <span style="color: #7c0080; font-size: 13px; font-weight: 700">( সেন্টমানি করুন )</span>
+        </div>
       </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="copy" onclick="copy('01779328777')">📋</span>
-        <span style="color:#666;font-size:13px">(সেন্টমানি করুন)</span>
+      
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee">
+        <div style="display: flex; align-items: center; gap: 8px">
+          <span style="color: #f37021; font-size: 18px">📤</span>
+          <b style="font-size: 18px; font-weight: 900">01779328777</b>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px">
+          <span onclick="copy('01779328777')" style="font-size: 20px; cursor: pointer">📋</span>
+          <span style="color: #666; font-size: 13px">(সেন্টমানি করুন)</span>
+        </div>
       </div>
-    </div>
-    
-    <div class="num">
-      <div style="display:flex;align-items:center;gap:8px">
-        <span style="color:#8a2be2">📤</span>
-        <b>01779328777</b>
+      
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0">
+        <div style="display: flex; align-items: center; gap: 8px">
+          <span style="color: #8a2be2; font-size: 18px">📤</span>
+          <b style="font-size: 18px; font-weight: 900">01779328777</b>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px">
+          <span onclick="copy('01779328777')" style="font-size: 20px; cursor: pointer">📋</span>
+          <span style="color: #666; font-size: 13px">(সেন্টমানি করুন)</span>
+        </div>
       </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="copy" onclick="copy('01779328777')">📋</span>
-        <span style="color:#666;font-size:13px">(সেন্টমানি করুন)</span>
+      
+      <!-- PAYMENT METHODS -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 14px 0">
+        <div class="method" id="m-bkash" onclick="selectMethod('bkash')" style="border: 2px solid #ddd; border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; background: #fff; transition: all 0.2s">
+          <div style="font-size: 24px">📱</div>
+          <b style="color: #e91e63; display: block; font-weight: 700; font-size: 13px; margin-top: 6px">bKash</b>
+          <div id="tick-bkash" style="font-size: 12px; color: #10b981; font-weight: 700; margin-top: 6px; min-height: 16px"></div>
+        </div>
+        <div class="method" id="m-nagad" onclick="selectMethod('nagad')" style="border: 2px solid #ddd; border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; background: #fff; transition: all 0.2s">
+          <div style="font-size: 24px">💳</div>
+          <b style="color: #f37021; display: block; font-weight: 700; font-size: 13px; margin-top: 6px">Nagad</b>
+          <div id="tick-nagad" style="font-size: 12px; color: #10b981; font-weight: 700; margin-top: 6px; min-height: 16px"></div>
+        </div>
+        <div class="method" id="m-rocket" onclick="selectMethod('rocket')" style="border: 2px solid #ddd; border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; background: #fff; transition: all 0.2s">
+          <div style="font-size: 24px">🚀</div>
+          <b style="color: #8a2be2; display: block; font-weight: 700; font-size: 13px; margin-top: 6px">Rocket</b>
+          <div id="tick-rocket" style="font-size: 12px; color: #10b981; font-weight: 700; margin-top: 6px; min-height: 16px"></div>
+        </div>
       </div>
-    </div>
-    
-    <!-- PAYMENT METHODS - SELECTABLE -->
-    <div class="methods">
-      <div class="method" id="m-bkash" onclick="selectMethod('bkash')">
-        <div class="method-icon">📱</div>
-        <b style="color:#e91e63">bKash</b>
-        <div class="method-tick" id="tick-bkash"></div>
+      
+      <!-- FORM INPUTS -->
+      <input id="from" style="width: 100%; border: 2px solid #000; border-radius: 10px; padding: 12px; margin: 8px 0; text-align: center; font-size: 15px" placeholder="যেই নাম্বার থেকে টাকা পাঠিয়েছেন">
+      <input id="amt" type="number" style="width: 100%; border: 2px solid #000; border-radius: 10px; padding: 12px; margin: 8px 0; text-align: center; font-size: 15px" placeholder="কত টাকা পাঠিয়েছেন">
+      <input id="trxid" style="width: 100%; border: 2px solid #000; border-radius: 10px; padding: 12px; margin: 8px 0; text-align: center; font-size: 15px" placeholder="TRXID (ঐচ্ছিক)">
+      
+      <!-- VERIFY BUTTON -->
+      <button onclick="verify()" style="width: 100%; background: #000; color: #fff; padding: 14px; border-radius: 12px; font-size: 18px; font-weight: 800; margin-top: 14px; border: 0; cursor: pointer; transition: all 0.2s">VERIFY</button>
+      
+      <!-- NOTE -->
+      <div style="font-size: 12px; color: #777; text-align: center; margin-top: 12px; line-height: 18px">
+        Verify করার আগে Send Money করতে হবে, নাহলে<br>আপনার Verification সফল হবে না
       </div>
-      <div class="method" id="m-nagad" onclick="selectMethod('nagad')">
-        <div class="method-icon">💳</div>
-        <b style="color:#f37021">Nagad</b>
-        <div class="method-tick" id="tick-nagad"></div>
-      </div>
-      <div class="method" id="m-rocket" onclick="selectMethod('rocket')">
-        <div class="method-icon">🚀</div>
-        <b style="color:#8a2be2">Rocket</b>
-        <div class="method-tick" id="tick-rocket"></div>
-      </div>
-    </div>
-    
-    <!-- FORM INPUTS -->
-    <input class="input" id="from" placeholder="যেই নাম্বার থেকে টাকা পাঠিয়েছেন">
-    <input class="input" id="amt" type="number" placeholder="কত টাকা পাঠিয়েছেন">
-    <input class="input" id="trxid" placeholder="TRXID (ঐচ্ছিক)">
-    
-    <!-- VERIFY BUTTON -->
-    <button class="verify" onclick="verify()">VERIFY</button>
-    
-    <!-- NOTE -->
-    <div class="note">
-      Verify করার আগে Send Money করতে হবে, নাহলে<br>আপনার Verification সফল হবে না
     </div>
   </div>
 </div>
@@ -301,11 +419,21 @@
 <script>
   let selectedMethod = '';
   
-  function go(id) {
-    document.getElementById('home').classList.add('hide');
-    document.getElementById('wallet').classList.add('hide');
-    document.getElementById('add').classList.add('hide');
-    document.getElementById(id).classList.remove('hide');
+  function openWallet() {
+    document.getElementById('home').classList.remove('active');
+    document.getElementById('wallet').classList.add('active');
+  }
+  
+  function closeWallet() {
+    document.getElementById('wallet').classList.remove('active');
+    document.getElementById('addMoney').classList.remove('active');
+    document.getElementById('home').classList.add('active');
+    selectedMethod = '';
+  }
+  
+  function goAddMoney() {
+    document.getElementById('wallet').classList.remove('active');
+    document.getElementById('addMoney').classList.add('active');
   }
   
   function copy(t) {
@@ -316,23 +444,18 @@
   function selectMethod(type) {
     selectedMethod = type;
     
-    // Update borders
     document.querySelectorAll('.method').forEach(m => m.style.border = '2px solid #ddd');
     document.getElementById('m-' + type).style.border = '2px solid #000';
     
-    // Clear all ticks
     document.getElementById('tick-bkash').innerHTML = '';
     document.getElementById('tick-nagad').innerHTML = '';
     document.getElementById('tick-rocket').innerHTML = '';
     document.getElementById('tick-' + type).innerHTML = '✅ সিলেক্টেড';
     
-    // Copy number
     navigator.clipboard.writeText('01779328777');
     
-    // Vibrate if available
     if (navigator.vibrate) navigator.vibrate(50);
     
-    // Alert
     alert(type.toUpperCase() + ' সিলেক্ট হয়েছে!\n01779328777 কপি হয়েছে\nএখন Send Money করুন');
   }
   
@@ -352,7 +475,6 @@
     
     alert(a + " টাকা " + selectedMethod + " এ Verify পাঠানো হয়েছে!");
     
-    // Clear form
     document.getElementById('from').value = '';
     document.getElementById('amt').value = '';
     document.getElementById('trxid').value = '';
@@ -362,9 +484,6 @@
     document.getElementById('tick-nagad').innerHTML = '';
     document.getElementById('tick-rocket').innerHTML = '';
   }
-  
-  // Load add money page by default
-  go('add');
 </script>
 
 </body>
